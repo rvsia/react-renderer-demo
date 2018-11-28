@@ -1,4 +1,9 @@
 import React from 'react';
+import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
+import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from '../demo-data/widget-schema';
+import miqSchema from '../demo-data/miq-schema';
 
 class Pf4Mapper extends React.Component {
   constructor(props) {
@@ -18,6 +23,9 @@ class Pf4Mapper extends React.Component {
 
     this.state = {
       cssId,
+      schema: miqSchema,
+      schemaString: 'miq',
+      ui: uiArraySchema
     };
   }
   componentWillUnmount(){
@@ -26,10 +34,33 @@ class Pf4Mapper extends React.Component {
   }
   render() {
     return (
-      <div>
-        Pf 4 mapper
-      </div>
-    );
+      <div style={{ widht: '100%' }}>
+        <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
+          <Title size="4xl">Pf4 component mapper</Title>
+          <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
+            <ToolbarGroup>
+              <Button onClick={ () => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema })) }>arraySchema</Button>
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <Button onClick={ () => this.setState(state => ({ schema, schemaString: 'mozilla', ui: uiSchema })) }>schema</Button>
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <Button onClick={ () => this.setState(state => ({ schema: miqSchema, schemaString: 'miq' })) }>miq</Button>
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <Button onClick={ () => this.setState(state => ({ schema: conditionalSchema, schemaString: 'mozilla', ui: uiSchema })) }>conditional</Button>
+            </ToolbarGroup>
+          </Toolbar>
+          <FormRenderer
+            onSubmit={ console.log }
+            schemaType={ this.state.schemaString }
+            formFieldsMapper={ formFieldsMapper }
+            layoutMapper={ layoutMapper }
+            schema={ this.state.schema }
+            uiSchema={ this.state.ui }
+          />
+        </div>
+      </div>);
   }
 }
 
