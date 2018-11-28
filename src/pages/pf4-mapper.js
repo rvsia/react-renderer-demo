@@ -25,7 +25,7 @@ class Pf4Mapper extends React.Component {
       cssId,
       schema: miqSchema,
       schemaString: 'miq',
-      ui: uiArraySchema
+      ui: uiArraySchema,
     };
   }
   componentWillUnmount(){
@@ -60,7 +60,8 @@ class Pf4Mapper extends React.Component {
             uiSchema={ this.state.ui }
           />
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
