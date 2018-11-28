@@ -91,6 +91,7 @@
     "@data-driven-forms/pf3-component-mapper": "latest",
     "@data-driven-forms/pf4-component-mapper": "latest",
     "@data-driven-forms/react-form-renderer": "latest",
+    "@patternfly/patternfly-next": "^1.0.84",
     "@patternfly/react-core": "~1.36.0",
     "@patternfly/react-icons": "~2.8.0",
     "patternfly-react": "^2.25.1",

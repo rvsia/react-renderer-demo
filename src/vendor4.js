@@ -1,1 +1,1 @@
-import './vendor4.scss';
+import '@patternfly/patternfly-next/patternfly.css';
