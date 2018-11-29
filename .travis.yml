@@ -13,10 +13,9 @@ script:
 cache:
   yarn: true
   directories:
-    - node_modules
+    - ~/.npm
 git:
   depth: 1
-
 deploy:
   provider: surge
   project: ./public/
