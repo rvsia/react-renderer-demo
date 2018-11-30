@@ -3,6 +3,7 @@ import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from '../demo-data/widget-schema';
+import wizardSchema from '../demo-data/wizard-schema';
 import miqSchema from '../demo-data/miq-schema';
 
 class Pf4Mapper extends React.Component {
@@ -23,8 +24,8 @@ class Pf4Mapper extends React.Component {
 
     this.state = {
       cssId,
-      schema: miqSchema,
-      schemaString: 'miq',
+      schema: wizardSchema,
+      schemaString: 'default',
       ui: uiArraySchema,
     };
   }
@@ -38,6 +39,9 @@ class Pf4Mapper extends React.Component {
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
           <Title size="4xl">Pf4 component mapper</Title>
           <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
+            <ToolbarGroup>
+              <Button onClick={ () => this.setState(state => ({ schema: wizardSchema, schemaString: 'default' })) }>Wizard</Button>
+            </ToolbarGroup>
             <ToolbarGroup>
               <Button onClick={ () => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema })) }>arraySchema</Button>
             </ToolbarGroup>
@@ -53,6 +57,7 @@ class Pf4Mapper extends React.Component {
           </Toolbar>
           <FormRenderer
             onSubmit={ console.log }
+            onCancel={ () => console.log('Cancel action') }
             schemaType={ this.state.schemaString }
             formFieldsMapper={ formFieldsMapper }
             layoutMapper={ layoutMapper }
