@@ -6,6 +6,7 @@ import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from 
 import wizardSchema from '../demo-data/wizard-schema';
 import miqSchema from '../demo-data/miq-schema';
 
+const Summary = props => <div>Custom summary component.</div>;
 class Pf4Mapper extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,12 @@ class Pf4Mapper extends React.Component {
       link.type = 'text/css';
       link.href = '/vendor4.css';
       link.media = 'all';
+      link.onload = () => this.setState({ isLoaded: true });
       head.appendChild(link);
     }
 
     this.state = {
+      isLoaded: false,
       cssId,
       schema: wizardSchema,
       schemaString: 'default',
@@ -34,6 +37,10 @@ class Pf4Mapper extends React.Component {
     pf4LinkTag.parentNode.removeChild(pf4LinkTag);
   }
   render() {
+    if (!this.state.isLoaded) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div style={{ widht: '100%' }}>
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
@@ -59,7 +66,10 @@ class Pf4Mapper extends React.Component {
             onSubmit={ console.log }
             onCancel={ () => console.log('Cancel action') }
             schemaType={ this.state.schemaString }
-            formFieldsMapper={ formFieldsMapper }
+            formFieldsMapper={{
+              ...formFieldsMapper,
+              summary: Summary,
+            }}
             layoutMapper={ layoutMapper }
             schema={ this.state.schema }
             uiSchema={ this.state.ui }
