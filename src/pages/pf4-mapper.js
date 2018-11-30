@@ -5,6 +5,7 @@ import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from '../demo-data/widget-schema';
 import wizardSchema from '../demo-data/wizard-schema';
 import miqSchema from '../demo-data/miq-schema';
+import Spinner from '../components/spinner';
 
 const Summary = props => <div>Custom summary component.</div>;
 class Pf4Mapper extends React.Component {
@@ -38,7 +39,7 @@ class Pf4Mapper extends React.Component {
   }
   render() {
     if (!this.state.isLoaded) {
-      return <div>Loading...</div>;
+      return <Spinner />;
     }
 
     return (
