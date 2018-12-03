@@ -4,6 +4,7 @@ import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf3-component-mapper';
 import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from '../demo-data/widget-schema';
 import miqSchema from '../demo-data/miq-schema';
+import Spinner from '../components/spinner';
 class Pf3Mapper extends React.Component {
   constructor(props) {
     super(props);
@@ -17,10 +18,12 @@ class Pf3Mapper extends React.Component {
       link.type = 'text/css';
       link.href = '/vendor.css';
       link.media = 'all';
+      link.onload = () => this.setState({ isLoaded: true });
       head.appendChild(link);
     }
 
     this.state = {
+      isLoaded: false,
       cssId,
       schema: miqSchema,
       schemaString: 'miq',
@@ -32,10 +35,14 @@ class Pf3Mapper extends React.Component {
     pf3LinkTag.parentNode.removeChild(pf3LinkTag);
   }
   render() {
+    if (!this.state.isLoaded) {
+      return <Spinner />;
+    }
+
     return (
       <div style={{ widht: '100%' }}>
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>Pf4 component mapper</h1>
+          <h1>Pf3 component mapper</h1>
           <ButtonGroup style={{ marginBottom: 20, marginTop: 20 }}>
             <Button onClick={ () => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema })) }>arraySchema</Button>
             <Button onClick={ () => this.setState(state => ({ schema, schemaString: 'mozilla', ui: uiSchema })) }>schema</Button>
