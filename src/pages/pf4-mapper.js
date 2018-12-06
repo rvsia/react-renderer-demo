@@ -31,6 +31,7 @@ class Pf4Mapper extends React.Component {
       schema: wizardSchema,
       schemaString: 'default',
       ui: uiArraySchema,
+      additionalOptions: { showFormControls: false },
     };
   }
   componentWillUnmount(){
@@ -48,19 +49,19 @@ class Pf4Mapper extends React.Component {
           <Title size="4xl">Pf4 component mapper</Title>
           <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
             <ToolbarGroup>
-              <Button onClick={ () => this.setState(state => ({ schema: wizardSchema, schemaString: 'default' })) }>Wizard</Button>
+              <Button onClick={ () => this.setState(state => ({ schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false }})) }>Wizard</Button>
             </ToolbarGroup>
             <ToolbarGroup>
-              <Button onClick={ () => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema })) }>arraySchema</Button>
+              <Button onClick={ () => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema, additionalOptions: {}})) }>arraySchema</Button>
             </ToolbarGroup>
             <ToolbarGroup>
-              <Button onClick={ () => this.setState(state => ({ schema, schemaString: 'mozilla', ui: uiSchema })) }>schema</Button>
+              <Button onClick={ () => this.setState(state => ({ schema, schemaString: 'mozilla', ui: uiSchema, additionalOptions: {}})) }>schema</Button>
             </ToolbarGroup>
             <ToolbarGroup>
-              <Button onClick={ () => this.setState(state => ({ schema: miqSchema, schemaString: 'miq' })) }>miq</Button>
+              <Button onClick={ () => this.setState(state => ({ schema: miqSchema, schemaString: 'miq', additionalOptions: {}})) }>miq</Button>
             </ToolbarGroup>
             <ToolbarGroup>
-              <Button onClick={ () => this.setState(state => ({ schema: conditionalSchema, schemaString: 'mozilla', ui: uiSchema })) }>conditional</Button>
+              <Button onClick={ () => this.setState(state => ({ schema: conditionalSchema, schemaString: 'mozilla', ui: uiSchema, additionalOptions: {}})) }>conditional</Button>
             </ToolbarGroup>
           </Toolbar>
           <FormRenderer
@@ -74,6 +75,7 @@ class Pf4Mapper extends React.Component {
             layoutMapper={ layoutMapper }
             schema={ this.state.schema }
             uiSchema={ this.state.ui }
+            { ...this.state.additionalOptions }
           />
         </div>
       </div>
