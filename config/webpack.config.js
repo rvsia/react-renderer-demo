@@ -31,6 +31,7 @@ const devConfig = {
   mode: 'development',
   entry: './demo/index.js',
   output: {
+    publicPath: '/',
     path: resolve('../dist'),
     filename: '[name].[hash].js',
   },
@@ -42,7 +43,7 @@ const devConfig = {
 };
 
 const prodConfig = {
-  mode: 'production',
+  mode: 'development',
   entry: './demo/index.js',
   output: {
     path: resolve('./public'),

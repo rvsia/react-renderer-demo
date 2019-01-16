@@ -2,7 +2,7 @@ import React, { Component  } from 'react';
 import Grid from '@material-ui/core/Grid';
 import AceEditor from 'react-ace';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
 import 'brace/mode/jsx';
 import 'brace/mode/json';
 import 'brace/snippets/json';

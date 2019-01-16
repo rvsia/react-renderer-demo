@@ -40,7 +40,7 @@ const LandingPage = () => (
         </CardContent>
         <CardActions disableActionSpacing>
           <Grid container alignItems="center" justify="center">
-            <RouterLink to="/react-form-renderer" style={{ width: '100%' }}>
+            <RouterLink to="/secret/react-form-renderer" style={{ width: '100%' }}>
               <Button color="primary" style={{ width: '100%' }}>
                 Form Renderer
               </Button>
@@ -64,7 +64,7 @@ const LandingPage = () => (
         </CardContent>
         <CardActions disableActionSpacing>
           <Grid container alignItems="center" justify="center">
-            <RouterLink to="/react-form-renderer" style={{ width: '100%' }}>
+            <RouterLink to="/secret/react-form-renderer" style={{ width: '100%' }}>
               <Button color="primary" style={{ width: '100%' }}>
                 Form Schema Definition
               </Button>
@@ -93,7 +93,7 @@ const LandingPage = () => (
         <Grid item>
           <Card square>
             <CardActionArea>
-              <RouterLink to="/react-form-renderer">
+              <RouterLink to="/secret/react-form-renderer">
                 <CardContent>
                   <Typography component="h5" variant="h5">
                     Material ui mapper
