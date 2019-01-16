@@ -65,5 +65,7 @@ coverage
 yarn.lock
 *.log
 
-public
+public/*.js
+public/*.css
 !public/*.html
+!public/404.html
