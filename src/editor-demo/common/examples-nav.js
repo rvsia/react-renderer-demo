@@ -25,7 +25,7 @@ class Navigation extends Component  {
 
   hanleExpandComponents = () => this.setState(({ expandComponents }) => ({ expandComponents: !expandComponents }))
 
-  renderExamplesItems = (basePath, items) => items.map(({ component, linkText }) => (
+  renderExamplesItems = (basePath, items) => items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
     <ListItem
       key={ component }
       button
