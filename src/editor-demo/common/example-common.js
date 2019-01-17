@@ -13,12 +13,33 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import PropTypes from 'prop-types';
 import { baseExamples } from './examples-definitions';
-import { validatorTypes } from '@data-driven-forms/react-form-renderer'
+import { validatorTypes } from '@data-driven-forms/react-form-renderer';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
 import 'brace/snippets/json';
 import 'brace/theme/monokai';
+
+// Text inputs are first, then all other actions are sorted by title
+const comparator = (a, b) => {
+  if (a.component === 'input') {
+    if (a.component !== b.component) {
+      return -1;
+    }
+  } else if (b.component === 'input') {
+    return 1;
+  }
+
+  if (a.title < b.title) {return -1;}
+
+  if (a.title > b.title) {return 1;}
+
+  return 0;
+};
 
 class ComponentExample extends Component {
   constructor(props) {
@@ -42,67 +63,85 @@ class ComponentExample extends Component {
     }
   }
 
-  handleExampleVariantChange = (value, index) => this.setState(prevState =>({
-    ...prevState,
-    variants: prevState.variants.map((item, i) => {
+  handleExampleVariantChange = (value, index) => this.setState(prevState => {
+    const variants = prevState.variants.map((item, i) => {
       if (i !== index) {
         return item;
       }
 
       return { ...item, value };
-    }),
-  }),
-  () => this.setState(prevState =>
-    ({ value: JSON.stringify({
-      ...JSON.parse(prevState.value),
-      fields: JSON.parse(prevState.value).fields.map(item => ({
-        ...item,
-        ...prevState.variants.reduce((acc, curr) => ({
-          ...acc,
-          [curr.name]: curr.value,
-          validate: curr.name === 'isRequired' && curr.value === false ? acc.validate.filter(({ type }) => type === validatorTypes.REQUIRED) : curr.validate ? [ ...acc.validate, ...curr.validate ] : [ ...acc.validate ],
-        }), { validate: []}),
-      })),
-    }, null, 2),
-    }),
-  () => this.setState({ parsedSchema: JSON.parse(this.state.value) })),
-  )
+    });
 
-  renderActions = (actions) => actions.map(({ name, options, title, ...rest }, index) => {
-    if (options) {
+    const previousValue = JSON.parse(prevState.value);
+    const newVariants = variants.reduce((acc, curr) => {
+      return ({
+        ...acc,
+        [curr.name]: curr.value,
+        validate: curr.name === 'isRequired' && !curr.value ? acc.validate.filter(({ type }) =>
+          type === validatorTypes.REQUIRED) : curr.validate ? [ ...acc.validate, ...curr.validate ] : [ ...acc.validate ],
+      });}, { validate: []});
+    const newValue = { ...previousValue, fields: previousValue.fields.map(item => ({
+      ...item,
+      ...newVariants,
+    })) };
+    const newState = {
+      variants,
+      value: JSON.stringify(newValue, null, 2),
+      parsedSchema: newValue,
+    };
+
+    return newState;
+  });
+
+  renderActions = (actions) => actions.length === 0 ? <Typography variant="h6">No props</Typography> :
+    actions.sort(comparator).map(({ name, options, title, component }, index) => {
+      if (options) {
+        return (
+          <FormGroup key={ name }>
+            <FormControl>
+              <InputLabel htmlFor={ name }>{ title }</InputLabel>
+              <Select
+                value={ this.state.variants[index].value || '' }
+                onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+                inputProps={{
+                  name,
+                  id: name,
+                }}
+              >
+                { options.map(option => (<MenuItem key={ option } value={ option }>{ option }</MenuItem>)) }
+              </Select>
+            </FormControl>
+          </FormGroup>
+        );
+      }
+
+      if (component === 'input'){
+        return (
+          <TextField
+            key={ name }
+            id={ name }
+            label={ title }
+            value={ this.state.variants[index].value || '' }
+            onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+            margin="normal"
+          />
+        );
+      }
+
       return (
         <FormGroup key={ name }>
-          <FormControl>
-            <InputLabel htmlFor="age-simple">Age</InputLabel>
-            <Select
-              value={ rest.value || '' }
-              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-              inputProps={{
-                name,
-                id: name,
-              }}
-            >
-              { options.map(option => (<MenuItem key={ option } value={ option }>{ option }</MenuItem>)) }
-            </Select>
-          </FormControl>
+          <FormControlLabel
+            control={ <Checkbox
+              checked={ this.state.variants[index].value || false }
+              onChange={ (_e, value) => this.handleExampleVariantChange(value, index) }
+              value="checkedB"
+              color="primary"
+            /> }
+            label={ title }
+          />
         </FormGroup>
       );
-    }
-
-    return (
-      <FormGroup key={ name }>
-        <FormControlLabel
-          control={ <Checkbox
-            checked={ this.state.checkedB }
-            onChange={ (_e, value) => this.handleExampleVariantChange(value, index) }
-            value="checkedB"
-            color="primary"
-          /> }
-          label="Primary"
-        />
-      </FormGroup>
-    );
-  })
+    })
 
   onChange = value => {
     try {
@@ -116,17 +155,36 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema } = this.state;
+    const { value, parsedSchema, linkText } = this.state;
     return (
       <Grid
         container
         spacing={ 16 }
       >
-        <Grid
-          item
-          xs={ 5 }
-        >
+        <Grid item xs={ 12 } >
+          <Typography variant="h4" gutterBottom>
+            { linkText }
+          </Typography>
+          
+        </Grid>
+        <Grid item xs={ 4 } >
+          <Typography variant="h5" gutterBottom>
+              Schema
+          </Typography>
+        </Grid>
+        <Grid item xs={ 3 } >
+          <Typography variant="h5" gutterBottom>
+              Props
+          </Typography>
+        </Grid>
+        <Grid item xs={ 5 } >
+          <Typography variant="h5" gutterBottom>
+              Preview
+          </Typography>
+        </Grid>
+        <Grid item xs={ 4 } >
           <AceEditor
+            readOnly
             mode="json"
             theme="monokai"
             onChange={ this.onChange }
@@ -137,6 +195,7 @@ class ComponentExample extends Component {
             showPrintMargin={ true }
             showGutter={ true }
             highlightActiveLine={ true }
+            style={{ width: '100%' }}
             setOptions={{
               enableBasicAutocompletion: true,
               enableLiveAutocompletion: true,
@@ -145,25 +204,28 @@ class ComponentExample extends Component {
               tabSize: 2,
             }}
           />
-
         </Grid>
-        <Grid item xs={ 2 }>
-          { this.renderActions(this.state.variants) }
+        <Grid item xs={ 3 }>
+          <Card square>
+            <CardContent>
+              { this.renderActions(this.state.variants) }
+            </CardContent>
+          </Card>
         </Grid>
-        <Grid
-          item
-          xs={ 5 }
-        >
-          <FormRenderer
-            formFieldsMapper={ formFieldsMapper }
-            layoutMapper={ layoutMapper }
-            schema={ parsedSchema }
-            onSubmit={ console.log }
-          />
+        <Grid item xs={ 5 } >
+          <Card square style={{ overflow: 'initial' }}>
+            <CardContent>
+              <FormRenderer
+                formFieldsMapper={ formFieldsMapper }
+                layoutMapper={ layoutMapper }
+                schema={ parsedSchema }
+                onSubmit={ console.log }
+              />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     );
-
   }
 }
 
