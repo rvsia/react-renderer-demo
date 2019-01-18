@@ -174,7 +174,7 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText } = this.state;
+    const { value, parsedSchema, linkText, contentText } = this.state;
     const frameContents = {
       pf3: {
         head: <link key="1" rel="stylesheet" type="text/css" href="/vendor.css" onLoad={ () => {
@@ -298,6 +298,14 @@ class ComponentExample extends Component {
                 </div> }
             </CardContent>
           </Card>
+        </Grid>
+        <Grid item xs={ 12 } >
+          <Typography variant="h5" gutterBottom>
+              Notes
+          </Typography>
+        </Grid>
+        <Grid item xs={ 12 } >
+          { contentText ? contentText : 'No notes' }
         </Grid>
       </Grid>
     );
