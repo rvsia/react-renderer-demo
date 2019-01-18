@@ -32,7 +32,7 @@ class Navigation extends Component  {
       className={ this.props.classes.nested }
       component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
     >
-      <Typography variant="button" gutterBottom>
+      <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
         { linkText }
       </Typography>
     </ListItem>));
