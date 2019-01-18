@@ -1,7 +1,6 @@
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import GenericComponentText from './examples-texts/generic-mui-component';
 import TabsText from './examples-texts/tabs';
-import { Tabs } from '@material-ui/core';
 
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,

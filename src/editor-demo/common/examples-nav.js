@@ -17,13 +17,17 @@ import Typography from '@material-ui/core/Typography';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { navStyles } from './nav-styles';
 import { baseExamples } from './examples-definitions';
+import { docs } from './documenation-pages';
 
 class Navigation extends Component  {
   state = {
     expandComponents: false,
+    expandDocumentation: false,
   }
 
   hanleExpandComponents = () => this.setState(({ expandComponents }) => ({ expandComponents: !expandComponents }))
+
+  hanleExpandDocumentation = () => this.setState(({ expandDocumentation }) => ({ expandDocumentation: !expandDocumentation }))
 
   renderExamplesItems = (basePath, items) => items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
     <ListItem
@@ -39,7 +43,7 @@ class Navigation extends Component  {
 
   render(){
     const { classes } = this.props;
-    const { expandComponents } = this.state;
+    const { expandComponents, expandDocumentation } = this.state;
 
     return (
       <div className={ classes.root }>
@@ -56,12 +60,18 @@ class Navigation extends Component  {
             subheader={ <ListSubheader component="div">Data driven forms</ListSubheader> }
             className={ classes.listRoot }
           >
-            <ListItem button>
+            <ListItem button onClick={ this.hanleExpandDocumentation }>
               <ListItemIcon>
                 <SendIcon />
               </ListItemIcon>
               <ListItemText inset primary="React form renderer" />
+              { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
             </ListItem>
+            <Collapse in={ expandDocumentation } timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                { this.renderExamplesItems('/secret/renderer', docs) }
+              </List>
+            </Collapse>
             <ListItem button>
               <ListItemIcon>
                 <DraftsIcon />
