@@ -22,9 +22,9 @@ const App = () => (
       </Grid>
       <Grid item xs={ 10 }>
         <Switch>
-          <Route exact path="/secret" component={ LandingPage } />
-          <Route exact path="/secret/react-form-renderer" component={ FormRendererPage } />
-          <Route exact path="/secret/component-example/:component" component={ ComponentExample } />
+          <Route exact path="/" component={ LandingPage } />
+          <Route exact path="/react-form-renderer" component={ FormRendererPage } />
+          <Route exact path="/component-example/:component" component={ ComponentExample } />
         </Switch>
       </Grid>
     </Grid>

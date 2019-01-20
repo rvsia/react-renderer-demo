@@ -37,6 +37,8 @@ const devConfig = {
   },
   devServer: {
     historyApiFallback: true,
+    contentBase: resolve('public'),
+    publicPath: '/',
   },
   devtool: 'source-map',
   plugins: [ htmlPlugin ],

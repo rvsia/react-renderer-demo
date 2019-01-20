@@ -77,7 +77,7 @@ class Navigation extends Component  {
             </ListItem>
             <Collapse in={ expandComponents } timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                { this.renderExamplesItems('/secret/component-example', baseExamples) }
+                { this.renderExamplesItems('/component-example', baseExamples) }
               </List>
             </Collapse>
           </List>

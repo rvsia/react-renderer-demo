@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import AceEditor from 'react-ace';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
+import { formFieldsMapper as pf4FormFieldsMapper, layoutMapper as pf4LayoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { formFieldsMapper as pf3FormFieldsMapper, layoutMapper as pf3LayoutMapper } from '@data-driven-forms/pf3-component-mapper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
@@ -18,6 +20,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import Frame from 'react-frame-component';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -41,6 +47,21 @@ const comparator = (a, b) => {
   return 0;
 };
 
+const frameContents = {
+  pf3: {
+    head: <link rel="stylesheet" type="text/css" href="/vendor.css" />,
+  },
+  pf4: {
+    head: <link rel="stylesheet" type="text/css" href="/vendor4.css" />,
+  },
+};
+
+const mapperVariants = {
+  mui: { formFieldsMapper, layoutMapper },
+  pf4: { formFieldsMapper: pf4FormFieldsMapper, layoutMapper: pf4LayoutMapper },
+  pf3: { formFieldsMapper: pf3FormFieldsMapper, layoutMapper: pf3LayoutMapper },
+};
+
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +70,7 @@ class ComponentExample extends Component {
       ...baseStructure,
       value: JSON.stringify(baseStructure.value, null, 2),
       parsedSchema: baseStructure.value,
+      activeMapper: 'mui',
     };
   }
 
@@ -61,6 +83,10 @@ class ComponentExample extends Component {
         parsedSchema: baseStructure.value,
       });
     }
+  }
+
+  handleMapperChange = (_event, value) => {
+    this.setState({ activeMapper: value });
   }
 
   handleExampleVariantChange = (value, index) => this.setState(prevState => {
@@ -165,7 +191,7 @@ class ComponentExample extends Component {
           <Typography variant="h4" gutterBottom>
             { linkText }
           </Typography>
-          
+
         </Grid>
         <Grid item xs={ 4 } >
           <Typography variant="h5" gutterBottom>
@@ -214,13 +240,39 @@ class ComponentExample extends Component {
         </Grid>
         <Grid item xs={ 5 } >
           <Card square style={{ overflow: 'initial' }}>
+            <div style={{ padding: 8 }}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Component mapper</FormLabel>
+                <RadioGroup
+                  aria-label="component-mapper"
+                  name="component-mapper"
+                  value={ this.state.activeMapper }
+                  onChange={ this.handleMapperChange }
+                  style={{ flexDirection: 'row' }}
+                >
+                  <FormControlLabel value="mui" control={ <Radio /> } label="MUI" />
+                  <FormControlLabel value="pf3" control={ <Radio /> } label="PF3" />
+                  <FormControlLabel value="pf4" control={ <Radio /> } label="PF4" />
+                </RadioGroup>
+              </FormControl>
+            </div>
             <CardContent>
-              <FormRenderer
-                formFieldsMapper={ formFieldsMapper }
-                layoutMapper={ layoutMapper }
-                schema={ parsedSchema }
-                onSubmit={ console.log }
-              />
+              { this.state.activeMapper === 'mui' ?
+                <FormRenderer
+                  { ...mapperVariants[this.state.activeMapper] }
+                  schema={ parsedSchema }
+                  onSubmit={ console.log }
+                />
+                :
+                <Frame style={{ border: 'none', minHeight: 380, width: '100%' }} { ...frameContents[this.state.activeMapper] }>
+                  <div style={{ padding: 8, overflowX: 'hidden' }}>
+                    <FormRenderer
+                      { ...mapperVariants[this.state.activeMapper] }
+                      schema={ parsedSchema }
+                      onSubmit={ console.log }
+                    />
+                  </div>
+                </Frame> }
             </CardContent>
           </Card>
         </Grid>
