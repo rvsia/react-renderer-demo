@@ -1,1 +1,1 @@
-import '@patternfly/react-core/dist/styles/base.css';
+import '@patternfly/patternfly-next/patternfly.css';
