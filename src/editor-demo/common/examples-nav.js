@@ -29,17 +29,30 @@ class Navigation extends Component  {
 
   hanleExpandDocumentation = () => this.setState(({ expandDocumentation }) => ({ expandDocumentation: !expandDocumentation }))
 
-  renderExamplesItems = (basePath, items) => items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
-    <ListItem
-      key={ component }
-      button
-      className={ this.props.classes.nested }
-      component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
-    >
-      <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
-        { linkText }
-      </Typography>
-    </ListItem>));
+  renderExamplesItems = (basePath, items, sort = true) => sort ?
+    items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
+      <ListItem
+        key={ component }
+        button
+        className={ this.props.classes.nested }
+        component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
+      >
+        <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+          { linkText }
+        </Typography>
+      </ListItem>))
+    :
+    items.map(({ component, linkText }) => (
+      <ListItem
+        key={ component }
+        button
+        className={ this.props.classes.nested }
+        component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
+      >
+        <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+          { linkText }
+        </Typography>
+      </ListItem>));
 
   render(){
     const { classes } = this.props;
@@ -69,7 +82,7 @@ class Navigation extends Component  {
             </ListItem>
             <Collapse in={ expandDocumentation } timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                { this.renderExamplesItems('/secret/renderer', docs) }
+                { this.renderExamplesItems('/renderer', docs, false) }
               </List>
             </Collapse>
             <ListItem button>

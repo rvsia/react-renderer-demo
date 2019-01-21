@@ -28,10 +28,11 @@ class ComponentExample extends Component {
     return (
       <Grid container spacing={ 16 } >
         <Grid item xs={ 12 } >
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom >
             { linkText }
-          </Typography></Grid>
-        <Grid item xs={ 10 } >
+          </Typography>
+        </Grid>
+        <Grid item xs={ 8 } >
           { contentText }
         </Grid>
       </Grid>
