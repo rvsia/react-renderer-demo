@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "webpack --env prod --config ./config/webpack.config.js",
-    "vendor": "webpack --env vendor --config ./config/webpack.config.js",
     "vendor4": "webpack --env vendor4 --config ./config/webpack.config.js",
     "test": "jest --coverage",
     "test-ci": "jest && codecov",
