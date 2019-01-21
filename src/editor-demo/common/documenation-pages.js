@@ -1,12 +1,12 @@
 import GetStartedText from './doc-texts/get-started';
-import InstalationText from './doc-texts/instalation';
+import InstallationText from './doc-texts/installation';
 import FormSchemasText from './doc-texts/form-schemas';
 import ComponentMappingText from './doc-texts/component-mapping';
 
 export const docs = [{
-  component: 'instalation',
-  linkText: 'Instalation',
-  contentText: InstalationText,
+  component: 'installation',
+  linkText: 'Installation',
+  contentText: InstallationText,
 }, {
   component: 'get-started',
   linkText: 'Getting started',

@@ -5,7 +5,7 @@ import TabsText from './examples-texts/tabs';
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
   linkText: 'Text Field',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.TEXT_FIELD,
     label: 'First name',
@@ -44,7 +44,7 @@ export const baseExamples = [{
 }, {
   component: componentTypes.TEXTAREA_FIELD,
   linkText: 'Text area',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.TEXTAREA_FIELD,
     label: 'Long text',
@@ -80,7 +80,7 @@ export const baseExamples = [{
 {
   component: componentTypes.CHECKBOX,
   linkText: 'Checkbox',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.CHECKBOX,
     label: 'Checkbox',
@@ -99,7 +99,7 @@ export const baseExamples = [{
 {
   component: componentTypes.RADIO,
   linkText: 'Radio',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.RADIO,
     label: 'Radio',
@@ -123,7 +123,7 @@ export const baseExamples = [{
 {
   component: componentTypes.SELECT_COMPONENT,
   linkText: 'Select',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.SELECT_COMPONENT,
     label: 'Select',
@@ -165,7 +165,7 @@ export const baseExamples = [{
 {
   component: componentTypes.SWITCH,
   linkText: 'Switch',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.SWITCH,
     label: 'Switch',
@@ -188,7 +188,7 @@ export const baseExamples = [{
 {
   component: componentTypes.DATE_PICKER,
   linkText: 'Date picker',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.DATE_PICKER,
     label: 'Date Picker',
@@ -205,7 +205,7 @@ export const baseExamples = [{
 {
   component: componentTypes.TIME_PICKER,
   linkText: 'Time picker',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.TIME_PICKER,
     label: 'Time Picker',
@@ -222,7 +222,7 @@ export const baseExamples = [{
 {
   component: componentTypes.TABS,
   linkText: 'Tabs / Tab item',
-  contentText: TabsText,
+  ContentText: TabsText,
   value: { fields: [{
     component: componentTypes.TABS,
     name: 'tabs',
@@ -262,7 +262,7 @@ export const baseExamples = [{
 {
   component: componentTypes.SUB_FORM,
   linkText: 'Subform',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.SUB_FORM,
     title: 'Subform',
@@ -294,7 +294,7 @@ export const baseExamples = [{
 {
   component: 'checkbox-multiple',
   linkText: 'Checkbox multiple',
-  contentText: GenericComponentText,
+  ContentText: GenericComponentText,
   value: { fields: [{
     component: componentTypes.CHECKBOX,
     label: 'Checkbox',

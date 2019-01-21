@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import AceEditor from 'react-ace';
@@ -174,7 +174,7 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, contentText } = this.state;
+    const { value, parsedSchema, linkText, ContentText, activeMapper } = this.state;
     const frameContents = {
       pf3: {
         head: <link key="1" rel="stylesheet" type="text/css" href="/vendor.css" onLoad={ () => {
@@ -305,7 +305,7 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 12 } >
-          { contentText ? contentText : 'No notes' }
+          <ContentText activeMapper={ activeMapper } />
         </Grid>
       </Grid>
     );
