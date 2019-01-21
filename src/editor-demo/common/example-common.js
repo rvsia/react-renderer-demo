@@ -1,4 +1,4 @@
-import React, { Component  } from 'react';
+import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import AceEditor from 'react-ace';
@@ -47,15 +47,6 @@ const comparator = (a, b) => {
   return 0;
 };
 
-const frameContents = {
-  pf3: {
-    head: <link rel="stylesheet" type="text/css" href="/vendor.css" />,
-  },
-  pf4: {
-    head: <link rel="stylesheet" type="text/css" href="/vendor4.css" />,
-  },
-};
-
 const mapperVariants = {
   mui: { formFieldsMapper, layoutMapper },
   pf4: { formFieldsMapper: pf4FormFieldsMapper, layoutMapper: pf4LayoutMapper },
@@ -65,12 +56,14 @@ const mapperVariants = {
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
+    window.magix = this.frameRef;
     const baseStructure = baseExamples.find(item => item.component === props.match.params.component);
     this.state = {
       ...baseStructure,
       value: JSON.stringify(baseStructure.value, null, 2),
       parsedSchema: baseStructure.value,
       activeMapper: 'mui',
+      frameHeight: 360,
     };
   }
 
@@ -182,6 +175,20 @@ class ComponentExample extends Component {
   }
   render () {
     const { value, parsedSchema, linkText } = this.state;
+    const frameContents = {
+      pf3: {
+        head: <link key="1" rel="stylesheet" type="text/css" href="/vendor.css" onLoad={ () => {
+          const elem = document.getElementById('frame-form-wrapper');
+          elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
+        } } />,
+      },
+      pf4: {
+        head: <link rel="stylesheet" type="text/css" href="/vendor4.css" onLoad={ () => {
+          const elem = document.getElementById('frame-form-wrapper');
+          elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
+        } } />,
+      },
+    };
     return (
       <Grid
         container
@@ -258,21 +265,37 @@ class ComponentExample extends Component {
             </div>
             <CardContent>
               { this.state.activeMapper === 'mui' ?
-                <FormRenderer
-                  { ...mapperVariants[this.state.activeMapper] }
-                  schema={ parsedSchema }
-                  onSubmit={ console.log }
-                />
+                <div style={{ paddingLeft: 8 }}>
+                  <FormRenderer
+                    { ...mapperVariants[this.state.activeMapper] }
+                    schema={ parsedSchema }
+                    onSubmit={ console.log }
+                  />
+                </div>
                 :
-                <Frame style={{ border: 'none', minHeight: 380, width: '100%' }} { ...frameContents[this.state.activeMapper] }>
-                  <div style={{ padding: 8, overflowX: 'hidden' }}>
-                    <FormRenderer
-                      { ...mapperVariants[this.state.activeMapper] }
-                      schema={ parsedSchema }
-                      onSubmit={ console.log }
-                    />
-                  </div>
-                </Frame> }
+                <div style={{ position: 'relative' }}>
+                  <Frame
+                    contentDidUpdate={ () => {
+                      const elem = document.getElementById('frame-form-wrapper');
+                      elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
+                    } }
+                    id="frame-form-wrapper"
+                    style={{
+                      border: 'none',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                    { ...frameContents[this.state.activeMapper] }
+                  >
+                    <div style={{ padding: 8, overflowX: 'hidden' }}>
+                      <FormRenderer
+                        { ...mapperVariants[this.state.activeMapper] }
+                        schema={ parsedSchema }
+                        onSubmit={ console.log }
+                      />
+                    </div>
+                  </Frame>
+                </div> }
             </CardContent>
           </Card>
         </Grid>
