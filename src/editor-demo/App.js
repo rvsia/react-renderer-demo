@@ -6,6 +6,7 @@ import LandingPage from './pages/landing-page';
 import FormRendererPage from './pages/form-renderer-page';
 import Navigation from './common/examples-nav';
 import ComponentExample from './common/example-common';
+import DocPage from './common/doc-page';
 import './styles.scss';
 
 const theme = createMuiTheme({
@@ -25,6 +26,7 @@ const App = () => (
           <Route exact path="/" component={ LandingPage } />
           <Route exact path="/react-form-renderer" component={ FormRendererPage } />
           <Route exact path="/component-example/:component" component={ ComponentExample } />
+          <Route exact path="/renderer/:component" component={ DocPage } />
         </Switch>
       </Grid>
     </Grid>
