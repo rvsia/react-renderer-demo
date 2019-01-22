@@ -13,7 +13,7 @@ This is the default schema that is used directly for rendering the form. All oth
 
 The default schema is also very extensible. There is only a few requirements for the format. Most of the attributes are meta information and their shape is based upon **your** form components.
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 const schema = {
@@ -63,7 +63,7 @@ Array that contains field definitions.
 #### Fields
 This is the main data structure that holds definitions of all of the form fields. It is designed to match React rendering process. It must follow this rule:
 
-\`\`\`javascript
+\`\`\`jsx
 const fields = [{...}, [{...}, {...}], {...}, {...}, [[[{...}]]]]
 \`\`\`
 
@@ -91,7 +91,7 @@ Detailed descriptions of each attribute is below.
 |\`title?\`|string|
 |\`description?\`|string|
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 const field = {
@@ -107,7 +107,7 @@ Note that the field structure may vary based on your component implementation. T
 #### \`component: string\`
 Unique identifier of the component. Final component will be picked based on this key. There are several pre-defined constants identifying the most common components for ManageIQ and Insights apps.
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 componentTypes = {
@@ -142,7 +142,7 @@ Label for form field. The type is based on your component definition.
 Array of validation definitions. These are limited by the form renderer (Might be configurable in future).
 
 If you want to use out of the box validation, you must use this format:
-\`\`\`javascript
+\`\`\`jsx
 const validate = [{
   type: string,
   message: string?,
@@ -151,7 +151,7 @@ const validate = [{
 \`\`\`
 
 Each validator type has additional configuration options in addition to custom error message:
-\`\`\`javascript
+\`\`\`jsx
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 validatorTypes = {
@@ -204,7 +204,7 @@ Validation functions are triggered only when field has a value with exception of
 #### \`dataType: string?\`
 Adds field validation based on the value data type.
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const field = {
@@ -217,14 +217,14 @@ const field = {
 \`\`\`
 
 There are currently four defined data types:
-\`\`\`javascript
+\`\`\`jsx
 ['integer', 'number', 'bool', 'string']
 \`\`\`
 
 #### \`assignFieldProvider: bool?\` [DEPRECATED]
 FieldProvider is just a fancy name for [Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops). Following component types are wrapped in the FieldProvider by default:
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const wrappedComponents = [
@@ -246,7 +246,7 @@ Because we can't possibly guess all viable component types, by using \`assignFie
 #### \`condition: Object?\`
 Condition is used to define condition fields. For instance, field **A** should render only when field **B** has value **Foo**.
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const fields = [{
@@ -265,7 +265,7 @@ const fields = [{
 
 Sometimes you might want to show field when it's matching multiple values:
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const fields = [{
@@ -289,7 +289,7 @@ Any other attributes will be passed to the component matching the \`component\` 
 
 For examples definition of select component might look something like this:
 
-\`\`\`javascript
+\`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const field = {

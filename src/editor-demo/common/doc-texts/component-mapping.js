@@ -220,7 +220,7 @@ This renders and bundles fields and their values inside the \`SUB_FORM\` compone
 {
   "first-name": "Bob",
   "address": {
-    "city": "Prague"
+    "city": "Prague",
     ...
   }
 }

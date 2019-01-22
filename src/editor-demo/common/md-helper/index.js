@@ -15,25 +15,29 @@ import Paper from '@material-ui/core/Paper';
 
 const renderers = {
   paragraph: ({ children }) => <Typography variant="body1">{ children }</Typography>,
-  code: ({ value }) =>  <div style={{ background: '#272822', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
-    <AceEditor
-      readOnly
-      mode="jsx"
-      theme="monokai"
-      name="UNIQUE_ID_OF_DIV"
-      editorProps={{ $blockScrolling: true }}
-      value={ value }
-      fontSize={ 14 }
-      maxLines={ Infinity }
-      showPrintMargin={ false }
-      showGutter={ true }
-      highlightActiveLine={ false }
-      style={{ width: '80%', margin: 10 }}
-      setOptions={{
-        showLineNumbers: true,
-      }}
-    />
-  </div>,
+  code: ({ value, language }) =>
+    <div style={{ background: '#272822', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
+      <AceEditor
+        readOnly
+        mode={ typeof language === 'string' ? language.toLowerCase() : 'jsx' }
+        theme="monokai"
+        name="UNIQUE_ID_OF_DIV"
+        editorProps={{ $blockScrolling: true }}
+        value={ value }
+        fontSize={ 14 }
+        maxLines={ Infinity }
+        showPrintMargin={ false }
+        showGutter={ true }
+        highlightActiveLine={ false }
+        style={{ width: '80%', margin: 10 }}
+        setOptions={{
+          showLineNumbers: true,
+        }}
+        onLoad={ (editor) => {
+          editor.getSession().setUseWorker(false);
+        } }
+      />
+    </div>,
   link: ({ href, children }) => <Link href={ href }>{ children }</Link>,
   heading: ({ level, children }) => <Typography variant={ `h${level + 2}` } style={{ marginBottom: 10, marginTop: 10 }}>{ children }</Typography>,
   list: ({ children }) => <List>{ children }</List>,

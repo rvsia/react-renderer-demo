@@ -4,13 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Collapse from '@material-ui/core/Collapse';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
@@ -74,10 +70,7 @@ class Navigation extends Component  {
             className={ classes.listRoot }
           >
             <ListItem button onClick={ this.hanleExpandDocumentation }>
-              <ListItemIcon>
-                <SendIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="React form renderer" />
+              <ListItemText primary="React form renderer" />
               { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
             </ListItem>
             <Collapse in={ expandDocumentation } timeout="auto" unmountOnExit>
@@ -85,17 +78,11 @@ class Navigation extends Component  {
                 { this.renderExamplesItems('/renderer', docs, false) }
               </List>
             </Collapse>
-            <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Form schema" />
+            <ListItem button className={ classes.listItem }>
+              <ListItemText primary="Form schema" />
             </ListItem>
-            <ListItem button onClick={ this.hanleExpandComponents }>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Component definitions" />
+            <ListItem button onClick={ this.hanleExpandComponents } className={ classes.listItem }>
+              <ListItemText primary="Component definitions" />
               { expandComponents ? <ExpandLess /> : <ExpandMore /> }
             </ListItem>
             <Collapse in={ expandComponents } timeout="auto" unmountOnExit>
