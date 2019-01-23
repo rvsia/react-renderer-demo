@@ -27,6 +27,7 @@ const App = () => (
           <Route exact path="/react-form-renderer" component={ FormRendererPage } />
           <Route exact path="/component-example/:component" component={ ComponentExample } />
           <Route exact path="/renderer/:component" component={ DocPage } />
+          <Route exact path="/others/:component" component={ DocPage } />
         </Switch>
       </Grid>
     </Grid>
