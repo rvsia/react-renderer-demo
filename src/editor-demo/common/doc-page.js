@@ -4,11 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { docs } from './documenation-pages';
+import { otherExamples } from './other-pages';
 
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
-    const docPages = docs.find(item => item.component === props.match.params.component);
+    const allDocs = [ ...docs, ...otherExamples ];
+    const docPages = allDocs.find(item => item.component === props.match.params.component);
     this.state = {
       ...docPages,
     };
@@ -16,7 +18,8 @@ class ComponentExample extends Component {
 
   componentDidUpdate({ match: { params: { component }}}){
     if (component !== this.props.match.params.component) {
-      const docPages = docs.find(item => item.component === this.props.match.params.component);
+      const allDocs = [ ...docs, ...otherExamples ];
+      const docPages = allDocs.find(item => item.component === this.props.match.params.component);
       this.setState({
         ...docPages,
       });

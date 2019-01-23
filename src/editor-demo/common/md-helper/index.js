@@ -57,4 +57,4 @@ const renderers = {
   tableCell: ({ children }) =>  <TableCell>{ children }</TableCell>,
 };
 
-export default ({ source }) => <ReactMarkdown source={ source } renderers={ renderers } />;
+export default ({ source }) => <ReactMarkdown escapeHtml={ false } source={ source } renderers={ renderers } />;

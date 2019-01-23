@@ -13,17 +13,21 @@ import Typography from '@material-ui/core/Typography';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { navStyles } from './nav-styles';
 import { baseExamples } from './examples-definitions';
+import { otherExamples } from './other-pages';
 import { docs } from './documenation-pages';
 
 class Navigation extends Component  {
   state = {
     expandComponents: false,
     expandDocumentation: false,
+    expandOthers: false,
   }
 
   hanleExpandComponents = () => this.setState(({ expandComponents }) => ({ expandComponents: !expandComponents }))
 
   hanleExpandDocumentation = () => this.setState(({ expandDocumentation }) => ({ expandDocumentation: !expandDocumentation }))
+
+  hanleExpandOthers = () => this.setState(({ expandOthers }) => ({ expandOthers: !expandOthers }))
 
   renderExamplesItems = (basePath, items, sort = true) => sort ?
     items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
@@ -52,7 +56,7 @@ class Navigation extends Component  {
 
   render(){
     const { classes } = this.props;
-    const { expandComponents, expandDocumentation } = this.state;
+    const { expandComponents, expandDocumentation, expandOthers } = this.state;
 
     return (
       <div className={ classes.root }>
@@ -88,6 +92,15 @@ class Navigation extends Component  {
             <Collapse in={ expandComponents } timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 { this.renderExamplesItems('/component-example', baseExamples) }
+              </List>
+            </Collapse>
+            <ListItem button onClick={ this.hanleExpandOthers } className={ classes.listItem }>
+              <ListItemText primary="Others" />
+              { expandComponents ? <ExpandLess /> : <ExpandMore /> }
+            </ListItem>
+            <Collapse in={ expandOthers } timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                { this.renderExamplesItems('/others', otherExamples) }
               </List>
             </Collapse>
           </List>
