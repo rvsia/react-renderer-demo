@@ -1,6 +1,7 @@
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import GenericComponentText from './examples-texts/generic-mui-component';
 import TabsText from './examples-texts/tabs';
+import SubFormText from './examples-texts/sub-form';
 
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
@@ -262,7 +263,7 @@ export const baseExamples = [{
 {
   component: componentTypes.SUB_FORM,
   linkText: 'Subform',
-  ContentText: GenericComponentText,
+  ContentText: SubFormText,
   value: { fields: [{
     component: componentTypes.SUB_FORM,
     title: 'Subform',
