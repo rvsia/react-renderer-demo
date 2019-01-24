@@ -63,7 +63,6 @@ By default, the value contains all options from the right side select. However, 
 <br />
 
 **1** In constructor/componentDidMount/elsewhere (where you fetch data) save these values into state:
-\`originalLeftValues: filterOptions(options, value)\`       // this helper extracts left values from options
 \`originalOptions: options\`
 \`originalRightValues: value\`
 
@@ -74,7 +73,7 @@ By default, the value contains all options from the right side select. However, 
 <br />
 
 **\`filterOptions(originalOptions, values.duallist)\`** to get all values on left \n
-**\`addedLeftValues(originalOptions, values.duallist, originalLeftValues)\`** to get added values to left select \n
+**\`filterOptions(values.duallist, originalOptions)\`** to get added values to left select \n
 **\`filterOptions(values.duallist, originalRightValues)\`** to get added values to right select \n
 **\`getKeys(values)\`** to get keys of values \n
 

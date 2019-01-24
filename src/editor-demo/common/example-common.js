@@ -174,7 +174,7 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper } = this.state;
+    const { value, parsedSchema, linkText, ContentText, activeMapper, component } = this.state;
     const frameContents = {
       pf3: {
         head: <link key="1" rel="stylesheet" type="text/css" href="/vendor.css" onLoad={ () => {
@@ -305,7 +305,7 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 12 } >
-          <ContentText activeMapper={ activeMapper } />
+          <ContentText activeMapper={ activeMapper } component={ component } />
         </Grid>
       </Grid>
     );
