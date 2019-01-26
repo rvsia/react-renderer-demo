@@ -1,3 +1,10 @@
 a {
     text-decoration: none;
 }
+
+.app-container {
+    display: flex;
+    .grow-1 {
+        flex-grow: 1
+    }
+}

@@ -35,7 +35,7 @@ class ComponentExample extends Component {
             { linkText }
           </Typography>
         </Grid>
-        <Grid item xs={ 8 } >
+        <Grid item xs={ 12 } >
           { contentText }
         </Grid>
       </Grid>

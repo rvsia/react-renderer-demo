@@ -17,20 +17,24 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={ theme }>
-    <Grid container spacing={ 16 }>
-      <Grid item xs={ 2 }>
+    <div className="app-container">
+      <div>
         <Navigation />
-      </Grid>
-      <Grid item xs={ 10 }>
-        <Switch>
-          <Route exact path="/" component={ LandingPage } />
-          <Route exact path="/react-form-renderer" component={ FormRendererPage } />
-          <Route exact path="/component-example/:component" component={ ComponentExample } />
-          <Route exact path="/renderer/:component" component={ DocPage } />
-          <Route exact path="/others/:component" component={ DocPage } />
-        </Switch>
-      </Grid>
-    </Grid>
+      </div>
+      <div className="grow-1">
+        <Grid container spacing={ 16 }>
+          <Grid item xs={ 12 }>
+            <Switch>
+              <Route exact path="/" component={ LandingPage } />
+              <Route exact path="/react-form-renderer" component={ FormRendererPage } />
+              <Route exact path="/component-example/:component" component={ ComponentExample } />
+              <Route exact path="/renderer/:component" component={ DocPage } />
+              <Route exact path="/others/:component" component={ DocPage } />
+            </Switch>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
   </MuiThemeProvider>
 );
 
