@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import AceEditor from 'react-ace';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
 import { formFieldsMapper as pf4FormFieldsMapper, layoutMapper as pf4LayoutMapper } from '@data-driven-forms/pf4-component-mapper';
 import { formFieldsMapper as pf3FormFieldsMapper, layoutMapper as pf3LayoutMapper } from '@data-driven-forms/pf3-component-mapper';
@@ -27,6 +27,8 @@ import Button from '@material-ui/core/Button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Tooltip from '@material-ui/core/Tooltip';
+import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
+import Pf3Wizzard from '../demo-missing-fields/pf3i-wizzard/wizzard';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -51,9 +53,16 @@ const comparator = (a, b) => {
 };
 
 const mapperVariants = {
-  mui: { formFieldsMapper, layoutMapper },
-  pf4: { formFieldsMapper: pf4FormFieldsMapper, layoutMapper: pf4LayoutMapper },
-  pf3: { formFieldsMapper: pf3FormFieldsMapper, layoutMapper: pf3LayoutMapper },
+  mui: { formFieldsMapper: { ...formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div>  }, layoutMapper },
+  pf3: {
+    formFieldsMapper: {
+      ...pf3FormFieldsMapper,
+      [componentTypes.WIZARD]: Pf3Wizzard,
+      summary: () => <div>Pf3 summary</div>,
+    },
+    layoutMapper: pf3LayoutMapper,
+  },
+  pf4: { formFieldsMapper: { ...pf4FormFieldsMapper, summary: () => <div>Pf4 summary</div> }, layoutMapper: pf4LayoutMapper },
 };
 
 class ComponentExample extends Component {
@@ -190,7 +199,7 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip } = this.state;
+    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants } = this.state;
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -225,7 +234,7 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 4 } >
-          <div style={{ background: '#272822' }}>
+          <div style={{ background: '#272822', height: 510 }}>
             <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'relative', zIndex: 100 }}>
               <ClickAwayListener onClickAway={ this.handleTooltipClose }>
                 <Tooltip
@@ -273,7 +282,7 @@ class ComponentExample extends Component {
         <Grid item xs={ 3 }>
           <Card square>
             <CardContent>
-              { this.renderActions(this.state.variants) }
+              { this.renderActions(variants) }
             </CardContent>
           </Card>
         </Grid>
@@ -285,7 +294,7 @@ class ComponentExample extends Component {
                 <RadioGroup
                   aria-label="component-mapper"
                   name="component-mapper"
-                  value={ this.state.activeMapper }
+                  value={ activeMapper }
                   onChange={ this.handleMapperChange }
                   style={{ flexDirection: 'row' }}
                 >
@@ -296,15 +305,15 @@ class ComponentExample extends Component {
               </FormControl>
             </div>
             <CardContent>
-              <div className={ this.state.activeMapper }>
+              <div className={ activeMapper }>
                 <div style={{ paddingLeft: 8 }}>
                   <FormRenderer
-                    { ...mapperVariants[this.state.activeMapper] }
+                    { ...mapperVariants[activeMapper] }
                     schema={ parsedSchema }
                     onSubmit={ console.log }
+                    showFormControls={ component !== 'wizard' }
                   />
                 </div>
-
               </div>
             </CardContent>
           </Card>
