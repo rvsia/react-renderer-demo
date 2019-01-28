@@ -23,6 +23,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -63,6 +67,7 @@ class ComponentExample extends Component {
       parsedSchema: baseStructure.value,
       activeMapper: 'mui',
       frameHeight: 360,
+      openTooltip: false,
     };
   }
 
@@ -79,6 +84,14 @@ class ComponentExample extends Component {
 
   handleMapperChange = (_event, value) => {
     this.setState({ activeMapper: value });
+  }
+
+  handleTooltipClose = () => {
+    this.setState({ openTooltip: false });
+  }
+
+  handleTooltipOpen = () => {
+    this.setState({ openTooltip: true });
   }
 
   handleExampleVariantChange = (value, index) => this.setState(prevState => {
@@ -115,49 +128,54 @@ class ComponentExample extends Component {
     actions.sort(comparator).map(({ name, options, title, component }, index) => {
       if (options) {
         return (
-          <FormGroup key={ name }>
-            <FormControl>
-              <InputLabel htmlFor={ name }>{ title }</InputLabel>
-              <Select
-                value={ this.state.variants[index].value || '' }
-                onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-                inputProps={{
-                  name,
-                  id: name,
-                }}
-              >
-                { options.map(option => (<MenuItem key={ option } value={ option }>{ option }</MenuItem>)) }
-              </Select>
-            </FormControl>
-          </FormGroup>
+          <Grid item xs={ 12 } key={ name }>
+            <FormGroup>
+              <FormControl>
+                <InputLabel htmlFor={ name }>{ title }</InputLabel>
+                <Select
+                  value={ this.state.variants[index].value || '' }
+                  onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+                  inputProps={{
+                    name,
+                    id: name,
+                  }}
+                >
+                  { options.map(option => (<MenuItem key={ option } value={ option }>{ option }</MenuItem>)) }
+                </Select>
+              </FormControl>
+            </FormGroup>
+          </Grid>
         );
       }
 
       if (component === 'input'){
         return (
-          <TextField
-            key={ name }
-            id={ name }
-            label={ title }
-            value={ this.state.variants[index].value || '' }
-            onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-            margin="normal"
-          />
+          <Grid item xs={ 12 } key={ name }>
+            <TextField
+              id={ name }
+              label={ title }
+              value={ this.state.variants[index].value || '' }
+              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+              margin="normal"
+            />
+          </Grid>
         );
       }
 
       return (
-        <FormGroup key={ name }>
-          <FormControlLabel
-            control={ <Checkbox
-              checked={ this.state.variants[index].value || false }
-              onChange={ (_e, value) => this.handleExampleVariantChange(value, index) }
-              value="checkedB"
-              color="primary"
-            /> }
-            label={ title }
-          />
-        </FormGroup>
+        <Grid item xs={ 12 } key={ name }>
+          <FormGroup >
+            <FormControlLabel
+              control={ <Checkbox
+                checked={ this.state.variants[index].value || false }
+                onChange={ (_e, value) => this.handleExampleVariantChange(value, index) }
+                value="checkedB"
+                color="primary"
+              /> }
+              label={ title }
+            />
+          </FormGroup>
+        </Grid>
       );
     })
 
@@ -172,7 +190,14 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component } = this.state;
+    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip } = this.state;
+
+    const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
+    .replace(/ {2}\]\n}$/, '')
+    .replace(/\n {4}/g, '\n')
+    .replace(/ {2}"validate": \[\],\n/g, '')
+    .replace(/ {4}/, '');
+
     return (
       <Grid
         container
@@ -200,27 +225,50 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 4 } >
-          <AceEditor
-            readOnly
-            mode="json"
-            theme="monokai"
-            onChange={ this.onChange }
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{ $blockScrolling: true }}
-            value={ value }
-            fontSize={ 14 }
-            showPrintMargin={ true }
-            showGutter={ true }
-            highlightActiveLine={ true }
-            style={{ width: '100%' }}
-            setOptions={{
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: true,
-              enableSnippets: true,
-              showLineNumbers: true,
-              tabSize: 2,
-            }}
-          />
+          <div style={{ background: '#272822' }}>
+            <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'relative', zIndex: 100 }}>
+              <ClickAwayListener onClickAway={ this.handleTooltipClose }>
+                <Tooltip
+                  PopperProps={{
+                    disablePortal: true,
+                  }}
+                  onClose={ this.handleTooltipClose }
+                  open={ openTooltip }
+                  disableFocusListener
+                  disableHoverListener
+                  disableTouchListener
+                  title="Copied"
+                >
+                  <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
+                    <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
+        Copy
+                    </Button>
+                  </CopyToClipboard>
+                </Tooltip>
+              </ClickAwayListener>
+            </Grid>
+            <AceEditor
+              readOnly
+              mode="json"
+              theme="monokai"
+              onChange={ this.onChange }
+              name="UNIQUE_ID_OF_DIV"
+              editorProps={{ $blockScrolling: true }}
+              value={ editedValue }
+              fontSize={ 14 }
+              showPrintMargin={ false }
+              showGutter={ true }
+              highlightActiveLine={ true }
+              style={{ width: '100%', top: -45 }}
+              setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+                showLineNumbers: true,
+                tabSize: 2,
+              }}
+            />
+          </div>
         </Grid>
         <Grid item xs={ 3 }>
           <Card square>

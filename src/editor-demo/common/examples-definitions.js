@@ -62,7 +62,7 @@ export const baseExamples = [{
     name: 'label',
     title: 'Label',
     component: 'input',
-    value: 'Lon text',
+    value: 'Long text',
   }, {
     name: 'placeholder',
     title: 'Placeholder',
