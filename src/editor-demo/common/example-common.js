@@ -23,7 +23,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import Frame from 'react-frame-component';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -175,20 +174,6 @@ class ComponentExample extends Component {
   }
   render () {
     const { value, parsedSchema, linkText, ContentText, activeMapper, component } = this.state;
-    const frameContents = {
-      pf3: {
-        head: <link key="1" rel="stylesheet" type="text/css" href="/vendor.css" onLoad={ () => {
-          const elem = document.getElementById('frame-form-wrapper');
-          elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
-        } } />,
-      },
-      pf4: {
-        head: <link rel="stylesheet" type="text/css" href="/vendor4.css" onLoad={ () => {
-          const elem = document.getElementById('frame-form-wrapper');
-          elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
-        } } />,
-      },
-    };
     return (
       <Grid
         container
@@ -264,7 +249,7 @@ class ComponentExample extends Component {
               </FormControl>
             </div>
             <CardContent>
-              { this.state.activeMapper === 'mui' ?
+              <div className={ this.state.activeMapper }>
                 <div style={{ paddingLeft: 8 }}>
                   <FormRenderer
                     { ...mapperVariants[this.state.activeMapper] }
@@ -272,30 +257,8 @@ class ComponentExample extends Component {
                     onSubmit={ console.log }
                   />
                 </div>
-                :
-                <div style={{ position: 'relative' }}>
-                  <Frame
-                    contentDidUpdate={ () => {
-                      const elem = document.getElementById('frame-form-wrapper');
-                      elem.style.height = `${elem.contentWindow.document.body.scrollHeight}px`;
-                    } }
-                    id="frame-form-wrapper"
-                    style={{
-                      border: 'none',
-                      width: '100%',
-                      height: '100%',
-                    }}
-                    { ...frameContents[this.state.activeMapper] }
-                  >
-                    <div style={{ padding: 8, overflowX: 'hidden' }}>
-                      <FormRenderer
-                        { ...mapperVariants[this.state.activeMapper] }
-                        schema={ parsedSchema }
-                        onSubmit={ console.log }
-                      />
-                    </div>
-                  </Frame>
-                </div> }
+
+              </div>
             </CardContent>
           </Card>
         </Grid>
