@@ -73,6 +73,14 @@ class Navigation extends Component  {
             subheader={ <ListSubheader component="div">Data driven forms</ListSubheader> }
             className={ classes.listRoot }
           >
+            <ListItem
+              button
+              component={ props =>  <RouterLink to="/" { ...props } /> }
+            >
+              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+                Form demos
+              </Typography>
+            </ListItem>
             <ListItem button onClick={ this.hanleExpandDocumentation }>
               <ListItemText primary="React form renderer" />
               { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
