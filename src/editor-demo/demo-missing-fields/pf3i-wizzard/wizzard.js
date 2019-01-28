@@ -1,6 +1,6 @@
 import React, { cloneElement } from 'react';
 import WizardStep from './wizard-step';
-import { Grid, Col} from 'patternfly-react';
+import { Grid, Col } from 'patternfly-react';
 
 class Wizard extends React.Component {
   state = {
@@ -39,13 +39,13 @@ class Wizard extends React.Component {
       />);
 
     return (
-      <Grid container>
-        <Col item xs={ 12 }>
+      <Grid style={{ maxWidth: '100%' }}>
+        <Col xs={ 12 }>
           <h3>{ title }</h3>
           <p>{ description }</p>
           <h5>{ `Step ${this.state.prevSteps.length + 1}` }</h5>
         </Col>
-        <Col item xs={ 12 }>
+        <Col xs={ 12 }>
           { cloneElement(currentStep, {
             handleNext: this.handleNext,
             handlePrev: this.handlePrev,

@@ -11,7 +11,7 @@ Form renderer requires two different mappers. Layout mapper and Form  FieldsMapp
 ### Layout mapper
 Component inside this mapper influence the layout of the form. Now compared to the Form Fields mapper, we have to be very strict because we cannot define our own elements. Layout mapper must contain these types components:
 
-\`\`\`javascript
+\`\`\`jsx
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 
 const layoutComponents = {
