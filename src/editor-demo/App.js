@@ -7,6 +7,15 @@ import FormRendererPage from './pages/form-renderer-page';
 import Navigation from './common/examples-nav';
 import ComponentExample from './common/example-common';
 import DocPage from './common/doc-page';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Link from '@material-ui/core/Link';
+import GhIcon from './common/gh-svg-icon';
+
 import './styles.scss';
 
 const theme = createMuiTheme({
@@ -17,11 +26,27 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={ theme }>
+    <div>
+      <AppBar position="fixed" style={{ marginBottom: 64 }}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            This documentation is still work in progress. Please report any bugs, mistakes, suggestions etc. to the demo GitHub repository.
+          </Typography>
+          <Link color="inherit" target="_blank" rel="noopener" href="https://github.com/data-driven-forms/react-renderer-demo">
+            <IconButton color="inherit">
+              <SvgIcon>
+                <GhIcon />
+              </SvgIcon>
+            </IconButton>
+          </Link>
+        </Toolbar>
+      </AppBar>
+    </div>
     <div className="app-container">
       <div>
         <Navigation />
       </div>
-      <div className="grow-1">
+      <div className="grow-1" style={{ margin: 16 }}>
         <Grid container spacing={ 16 }>
           <Grid item xs={ 12 }>
             <Switch>

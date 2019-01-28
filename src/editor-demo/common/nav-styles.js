@@ -13,6 +13,7 @@ export const navStyles = theme => ({
     flexShrink: 0,
   },
   drawerPaper: {
+    top: 'initial',
     width: drawerWidth,
   },
   toolbar: theme.mixins.toolbar,
