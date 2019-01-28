@@ -81,6 +81,14 @@ class Navigation extends Component  {
                 Form demos
               </Typography>
             </ListItem>
+            <ListItem
+              button
+              component={ props =>  <RouterLink to="/live-editor" { ...props } /> }
+            >
+              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+                Live Form Editor
+              </Typography>
+            </ListItem>
             <ListItem button onClick={ this.hanleExpandDocumentation }>
               <ListItemText primary="React form renderer" />
               { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }

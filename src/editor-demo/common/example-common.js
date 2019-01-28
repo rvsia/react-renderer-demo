@@ -163,7 +163,6 @@ class ComponentExample extends Component {
 
   onChange = value => {
     try {
-      console.log('value: ', JSON.parse(value));
       this.setState({ parsedSchema: JSON.parse(value) });
     } catch (error) {
       console.warn('not a json', error);

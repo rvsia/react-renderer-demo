@@ -27,7 +27,7 @@ const theme = createMuiTheme({
 const App = () => (
   <MuiThemeProvider theme={ theme }>
     <div>
-      <AppBar position="fixed" style={{ marginBottom: 64 }}>
+      <AppBar position="fixed" style={{ marginBottom: 64, zIndex: 2000 }}>
         <Toolbar>
           <Typography variant="h6" color="inherit">
             This documentation is still work in progress. Please report any bugs, mistakes, suggestions etc. to the demo GitHub repository.
@@ -51,7 +51,7 @@ const App = () => (
           <Grid item xs={ 12 }>
             <Switch>
               <Route exact path="/" component={ LandingPage } />
-              <Route exact path="/react-form-renderer" component={ FormRendererPage } />
+              <Route exact path="/live-editor" component={ FormRendererPage } />
               <Route exact path="/component-example/:component" component={ ComponentExample } />
               <Route exact path="/renderer/:component" component={ DocPage } />
               <Route exact path="/others/:component" component={ DocPage } />
