@@ -11,8 +11,9 @@ export const baseExamples = [{
   value: { fields: [{
     component: componentTypes.TEXT_FIELD,
     label: 'First name',
-    name: 'firts-name',
+    name: 'first-name',
   }]},
+  canBeRequired: true,
   variants: [{
     name: 'isDisabled',
     title: 'Disabled',
@@ -36,17 +37,12 @@ export const baseExamples = [{
   },  {
     name: 'isReadOnly',
     title: 'Read only',
-  }, {
-    name: 'isRequired',
-    title: 'Required',
-    validate: [{
-      type: validatorTypes.REQUIRED,
-    }],
   }],
 }, {
   component: componentTypes.TEXTAREA_FIELD,
   linkText: 'Text area',
   ContentText: GenericComponentText,
+  canBeRequired: true,
   value: { fields: [{
     component: componentTypes.TEXTAREA_FIELD,
     label: 'Long text',
@@ -71,12 +67,6 @@ export const baseExamples = [{
   },  {
     name: 'isReadOnly',
     title: 'Read only',
-  }, {
-    name: 'isRequired',
-    title: 'Required',
-    validate: [{
-      type: validatorTypes.REQUIRED,
-    }],
   }],
 },
 {
@@ -102,6 +92,7 @@ export const baseExamples = [{
   component: componentTypes.RADIO,
   linkText: 'Radio',
   ContentText: GenericComponentText,
+  canBeRequired: true,
   value: { fields: [{
     component: componentTypes.RADIO,
     label: 'Radio',
@@ -126,6 +117,7 @@ export const baseExamples = [{
   component: componentTypes.SELECT_COMPONENT,
   linkText: 'Select',
   ContentText: GenericComponentText,
+  canBeRequired: true,
   value: { fields: [{
     component: componentTypes.SELECT_COMPONENT,
     label: 'Select',
@@ -161,8 +153,7 @@ export const baseExamples = [{
   {
     name: 'isSearchable',
     title: 'Searchable',
-  },
-  ],
+  }],
 },
 {
   component: componentTypes.SWITCH,
@@ -191,6 +182,7 @@ export const baseExamples = [{
   component: componentTypes.DATE_PICKER,
   linkText: 'Date picker',
   ContentText: GenericComponentText,
+  canBeRequired: true,
   value: { fields: [{
     component: componentTypes.DATE_PICKER,
     label: 'Date Picker',
@@ -208,6 +200,7 @@ export const baseExamples = [{
   component: componentTypes.TIME_PICKER,
   linkText: 'Time picker',
   ContentText: GenericComponentText,
+  canBeRequired: true,
   value: { fields: [{
     component: componentTypes.TIME_PICKER,
     label: 'Time Picker',
@@ -390,6 +383,6 @@ export const baseExamples = [{
       }],
     }],
   },
-  variants: []
+  variants: [],
 },
 ];
