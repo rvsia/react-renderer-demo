@@ -72,6 +72,17 @@ class ComponentExample extends Component {
     const baseStructure = baseExamples.find(item => item.component === props.match.params.component);
     this.state = {
       ...baseStructure,
+      variants: [
+        ...baseStructure.variants,
+        { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
+        ...(baseStructure.canBeRequired ? [{
+          name: 'isRequired',
+          title: 'Required',
+          validate: [{
+            type: validatorTypes.REQUIRED,
+          }],
+        }] : []),
+      ],
       value: JSON.stringify(baseStructure.value, null, 2),
       parsedSchema: baseStructure.value,
       activeMapper: 'mui',
@@ -85,6 +96,17 @@ class ComponentExample extends Component {
       const baseStructure = baseExamples.find(item => item.component === this.props.match.params.component);
       this.setState({
         ...baseStructure,
+        variants: [
+          ...baseStructure.variants,
+          { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
+          ...(baseStructure.canBeRequired ? [{
+            name: 'isRequired',
+            title: 'Required',
+            validate: [{
+              type: validatorTypes.REQUIRED,
+            }],
+          }] : []),
+        ],
         value: JSON.stringify(baseStructure.value, null, 2),
         parsedSchema: baseStructure.value,
       });
