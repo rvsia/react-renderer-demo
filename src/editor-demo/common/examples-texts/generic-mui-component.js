@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-const docsLinks = {
+export const docsLinks = {
   mui: 'https://material-ui.com/api/',
   pf4: 'http://patternfly-react.surge.sh/patternfly-4/components/',
   pf3: 'http://patternfly-react.surge.sh/patternfly-3/index.html',
