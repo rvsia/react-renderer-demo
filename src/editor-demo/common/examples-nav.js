@@ -98,9 +98,6 @@ class Navigation extends Component  {
                 { this.renderExamplesItems('/renderer', docs, false) }
               </List>
             </Collapse>
-            <ListItem button className={ classes.listItem }>
-              <ListItemText primary="Form schema" />
-            </ListItem>
             <ListItem button onClick={ this.hanleExpandComponents } className={ classes.listItem }>
               <ListItemText primary="Component definitions" />
               { expandComponents ? <ExpandLess /> : <ExpandMore /> }

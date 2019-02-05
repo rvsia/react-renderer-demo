@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import { layoutComponents } from '@data-driven-forms/react-form-renderer';
+
+const getTypes = (firstLine, apostrohpe = false) =>
+  Object
+  .entries(layoutComponents)
+  .reduce((acc, curr) => `${acc}\n  [layoutComponents.${curr[0]}]: ${apostrohpe ? `'${curr[1]}'` : curr[1]},`, firstLine);
 
 const text =  `
 As it was already mentioned, you can define your own components for rendering. In fact, you have to define them because the Form Renderer does not know anything about them. This way, the renderer is universal and can be used with any component library or your custom components. It is also very easy to swap the look of the form without any changes to the format!
@@ -14,15 +20,7 @@ Component inside this mapper influence the layout of the form. Now compared to t
 \`\`\`jsx
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 
-const layoutComponents = {
-  [layoutComponents.FORM_WRAPPER]: 'FormWrapper',
-  [layoutComponents.BUTTON]: 'Button',
-  [layoutComponents.COL]: 'Col',
-  [layoutComponents.FORM_GROUP]: 'FormGroup',
-  [layoutComponents.BUTTON_GROUP]: 'ButtonGroup',
-  [layoutComponents.ICON]: 'Icon',
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: 'ArrayFieldWrapper',
-  [layoutComponents.HELP_BLOCK]: 'HelpBlock'
+${ getTypes('const layoutComponents = {', true) }
 }
 \`\`\`
 
@@ -109,15 +107,7 @@ TO DO when array field docs are done
 \`\`\`JSX
 import FormRenderer, { layoutComponents } from '@data-driven-forms/react-form-renderer';
 
-const layoutMapper = {
-  [layoutComponents.FORM_WRAPPER]: FormWrapper,
-  [layoutComponents.BUTTON]: Button,
-  [layoutComponents.COL]: Col,
-  [layoutComponents.FORM_GROUP]: FormGroup,
-  [layoutComponents.BUTTON_GROUP]: ButtonGroup,
-  [layoutComponents.ICON]: Icon,
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: ArrayFieldWrapper,
-  [layoutComponents.HELP_BLOCK]: HelpBlock
+${ getTypes('const layoutMapper = {') }
 }
 
 const MyForm = () => (
@@ -133,7 +123,7 @@ const MyForm = () => (
 
 Unlike the layout components, the form fields are completely customizable, and the implementation is restricted to only one rule. In order to correctly change the form state, you have to use provided \`input\` and \`meta\` props to your input fields. These objects provide functions like \`onChange\`, \`onBlur\`, error messages, valid state and more. Again you should probably read more about that in the [React Final Form docs](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops).
 
-Some of the component types are wrapped in the Field component [by default](#assign-field-provider) and if you need to use different component type, you can pass it as a prop by adding the \`assignFieldProvider: true\` attribute to the field.
+Some of the component types are wrapped in the Field component [by default](#assign-field-provider) and if you need to use different component type, you can pass it as a prop.
 
 In an example below you can see an implementation of a simple input component using both predefined component type and a custom one.
 
@@ -178,7 +168,6 @@ const schema = {
     name: 'last-name',
     label: 'Last Name',
     type: 'text',
-    assignFieldProvider: true,
     validate: [{
       type: validatorTypes.REQUIRED,
     }]
@@ -212,17 +201,6 @@ const schema = {
       ...
     }]
   }]
-}
-\`\`\`
-
-This renders and bundles fields and their values inside the \`SUB_FORM\` component. When the form is submitted, the values object will look something like this:
-\`\`\`json
-{
-  "first-name": "Bob",
-  "address": {
-    "city": "Prague",
-    ...
-  }
 }
 \`\`\`
 
