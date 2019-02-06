@@ -28,7 +28,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Tooltip from '@material-ui/core/Tooltip';
 import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
-import Pf3Wizzard from '../demo-missing-fields/pf3i-wizzard/wizzard';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -57,7 +56,6 @@ const mapperVariants = {
   pf3: {
     formFieldsMapper: {
       ...pf3FormFieldsMapper,
-      [componentTypes.WIZARD]: Pf3Wizzard,
       summary: () => <div>Pf3 summary</div>,
     },
     layoutMapper: pf3LayoutMapper,
