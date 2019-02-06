@@ -7522,7 +7522,12 @@ readers do not read off random characters that represent icons */
   margin: 0;
   line-height: 1.66666667;
   /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
-  padding-bottom: 16px; }
+  padding-bottom: 16px;
+  /* styles the sidebard containing the sub-steps */
+  /* styles the steps indicator across the top of the wizard */
+  /* styles the main content portion of the wizard */
+  /* styles the content of a review page */
+  /* styles the footer */ }
 
 @font-face {
   .pf3 {
@@ -10925,4 +10930,563 @@ readers do not read off random characters that represent icons */
     background-color: transparent; }
   .pf3 .tab-content {
     padding-top: 8px; }
+  .pf3 .wizard-pf {
+    padding: 10px;
+    margin: 0 auto;
+    max-height: 900px;
+    width: auto; }
+  .pf3 .wizard-pf .modal-content {
+    min-height: 100%; }
+  .pf3 .wizard-pf-body {
+    background: #fff;
+    padding: 0;
+    position: static; }
+  .pf3 .wizard-pf-sidebar {
+    background: #fafafa;
+    border-right: 1px solid #d1d1d1;
+    display: none; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-sidebar {
+      display: inherit;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      overflow-x: hidden;
+      overflow-y: auto; }
+    .pf3 .wizard-pf-sidebar .list-group {
+      border-top: 0;
+      margin-bottom: 0; }
+    .pf3 .wizard-pf-sidebar .list-group-item {
+      background-color: transparent;
+      border-color: #ededed;
+      padding: 0; }
+    .pf3 .wizard-pf-sidebar .list-group-item > a {
+      color: #030303;
+      cursor: pointer;
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      height: 50px;
+      outline: 0;
+      padding-top: 11px;
+      padding-left: 20px;
+      position: relative;
+      white-space: nowrap;
+      width: 14em; }
+    .pf3 .wizard-pf-sidebar .list-group-item > a:hover {
+      background-color: #ededed;
+      text-decoration: none; }
+    .pf3 .wizard-pf-sidebar .list-group-item > a:hover:focus {
+      text-decoration: none; }
+    .pf3 .wizard-pf-sidebar .list-group-item > a:hover:focus span {
+      text-decoration: underline; }
+    .pf3 .wizard-pf-sidebar .list-group-item.active {
+      background-color: #ededed; }
+    .pf3 .wizard-pf-sidebar .list-group-item.active:hover {
+      border-color: #ededed; }
+    .pf3 .wizard-pf-sidebar .list-group-item.active > a {
+      color: #39a5dc;
+      cursor: default; }
+    .pf3 .wizard-pf-sidebar .list-group-item.active > a:before {
+      content: " ";
+      background: #39a5dc;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 3px; }
+    .pf3 .wizard-pf-sidebar .list-group-item.active > a:after {
+      color: #39a5dc;
+      content: "\F105";
+      display: block;
+      font-family: FontAwesome;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 30px;
+      padding-top: 10px;
+      position: absolute;
+      right: 23px;
+      top: 0; } }
+  .pf3 .wizard-pf-substep-number {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 25px; }
+  .pf3 .wizard-pf-substep-title {
+    display: inline-block;
+    margin-right: 5px;
+    text-align: left;
+    vertical-align: middle; }
+  .pf3 .wizard-pf-steps {
+    border-bottom: solid 1px #d1d1d1; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps {
+      text-align: center; } }
+  .pf3 .wizard-pf-steps-indicator {
+    background: #ededed;
+    border-top: 1px solid #d1d1d1;
+    display: inline-block;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    list-style: none;
+    margin-bottom: 0;
+    padding: 15px 0; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator {
+      background: #fff;
+      height: 120px;
+      padding: 38px 0 0;
+      -ms-flex-pack: distribute;
+      justify-content: space-around; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step {
+    counter-increment: section;
+    float: left;
+    /* float for IE9 since it doesn't support flex. If items wrap, they overlap */
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    line-height: 15px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    /* draw the line between the circles */ }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step:not(.active) {
+    display: none; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step:not(.active) {
+      display: block; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    font-weight: 700; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step a {
+      font-weight: normal;
+      -ms-flex-pack: center;
+      justify-content: center; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a .wizard-pf-step-title {
+    margin-left: 10px; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step a .wizard-pf-step-title {
+      margin-left: 0; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a .wizard-pf-step-title-substep {
+    font-weight: normal;
+    margin-left: 10px;
+    text-transform: capitalize; }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a .wizard-pf-step-title-substep:before {
+    content: "\BB";
+    font-size: 20px;
+    margin-right: 10px; }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a .wizard-pf-step-title-substep:not(.active) {
+    display: none; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step {
+      /* don't draw the line between the circles on the ends */ }
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step .wizard-pf-step-title-substep {
+      display: none; }
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step:before {
+      background-color: #bbb;
+      content: "";
+      height: 2px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 40px; }
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step:first-child:before {
+      left: 50%;
+      right: 0; }
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step:last-child:before {
+      left: 0;
+      right: 50%; }
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step:only-of-type:before {
+      background-color: transparent; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step a {
+    color: #030303;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 1em;
+    margin-right: 1em;
+    text-decoration: none; }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step:not(.active):not(.disabled) a:hover .wizard-pf-step-number {
+    background-color: #bbb;
+    border-color: #bbb;
+    color: #fff; }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step .wizard-pf-step-number {
+    background-color: #fff;
+    border-radius: 50%;
+    border: solid 2px #39a5dc;
+    color: #bbb;
+    font-size: 12px;
+    font-weight: 700;
+    height: 25px;
+    line-height: 22px;
+    width: 25px;
+    display: inline-block; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-indicator .wizard-pf-step .wizard-pf-step-number {
+      left: calc(50% - 13px);
+      position: absolute;
+      top: 27px; } }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step.active .wizard-pf-step-number {
+    background-color: #39a5dc;
+    border-color: #39a5dc;
+    cursor: default;
+    color: #fff; }
+  .pf3 .wizard-pf-steps-indicator .wizard-pf-step.active ~ .wizard-pf-step .wizard-pf-step-number {
+    border-color: #bbb;
+    background: #fff; }
+  .pf3 .wizard-pf-main {
+    height: 100%;
+    padding: 1em;
+    vertical-align: top;
+    width: 100%; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-main {
+      overflow: auto;
+      padding: 3em;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto; } }
+  .pf3 .wizard-pf-main .blank-slate-pf {
+    background-color: transparent;
+    border: none;
+    left: 0;
+    right: 0; }
+  .pf3 .wizard-pf-contents textarea {
+    resize: vertical; }
+  .pf3 .wizard-pf-review-steps {
+    list-style: none; }
+  .pf3 .wizard-pf-review-steps .list-group,
+  .pf3 .wizard-pf-review-steps .list-group-item {
+    border: none;
+    margin-bottom: 0; }
+  .pf3 .wizard-pf-review-steps > ul > li {
+    float: left;
+    line-height: 15px;
+    margin: 0;
+    padding-top: 0;
+    position: relative;
+    width: 100%; }
+  .pf3 .wizard-pf-review-steps > ul > li > a {
+    color: #030303;
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 30px;
+    padding-right: 5px;
+    text-decoration: none;
+    transition: 250ms; }
+  .pf3 .wizard-pf-review-steps > ul > li > a:before {
+    content: "\F107";
+    display: block;
+    font-family: FontAwesome;
+    font-size: 24px;
+    font-weight: 500;
+    left: 20px;
+    position: absolute;
+    top: 0; }
+  .pf3 .wizard-pf-review-steps > ul > li > a.collapsed:before {
+    content: "\F105"; }
+  .pf3 .wizard-pf-review-substeps {
+    padding-left: 22px; }
+  .pf3 .wizard-pf-review-substeps > ul > li {
+    float: left;
+    line-height: 15px;
+    margin: 0;
+    position: relative;
+    width: 100%; }
+  .pf3 .wizard-pf-review-substeps > ul > li a {
+    color: #030303;
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 30px;
+    padding-right: 5px;
+    text-decoration: none;
+    transition: 250ms; }
+  .pf3 .wizard-pf-review-substeps > ul > li a:before {
+    content: "\F107";
+    display: block;
+    font-family: FontAwesome;
+    font-size: 24px;
+    font-weight: 500;
+    left: 20px;
+    position: absolute;
+    top: 10px; }
+  .pf3 .wizard-pf-review-substeps > ul > li a.collapsed:before {
+    content: "\F105"; }
+  .pf3 .wizard-pf-review-content {
+    padding-top: 10px;
+    padding-left: 40px; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item {
+    padding: 5px 0; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item.sub-item {
+    margin-left: 10px; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item .wizard-pf-review-item-label {
+    font-weight: 700;
+    padding-right: 10px; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item .wizard-pf-review-item-field {
+    font-weight: 700;
+    margin: 5px 0;
+    padding-right: 10px; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item .wizard-pf-review-item-field:first-of-type {
+    margin-top: 0; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item .wizard-pf-review-item-field:last-of-type {
+    margin-bottom: 0; }
+  .pf3 .wizard-pf-review-content .wizard-pf-review-item .wizard-pf-review-item-field.sub-field {
+    margin-left: 10px; }
+  .pf3 .wizard-pf-success-icon {
+    color: #3f9c35;
+    font-size: 67.2px;
+    line-height: 67.2px; }
+  .pf3 .wizard-pf-footer {
+    background: #fff;
+    border-top: 1px solid #d1d1d1;
+    margin-top: 0;
+    padding-bottom: 17px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+    justify-content: flex-end; }
+  .pf3 .wizard-pf-footer .wizard-pf-cancel {
+    margin-right: 25px;
+    -ms-flex-order: -1;
+    order: -1; }
+  .pf3 .wizard-pf-footer .wizard-pf-next {
+    -ms-flex-order: 1;
+    order: 1;
+    margin-left: 8px; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-row {
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+      height: 900px;
+      max-height: 65vh; } }
+  @media (min-width: 992px) {
+    .pf3 .wizard-pf {
+      padding: 30px 0;
+      width: 900px; }
+    .pf3 .wizard-pf-sidebar .list-group-item > a {
+      width: 18em; } }
+  .pf3 .wizard-pf-steps-alt,
+  .pf3 .wizard-pf-steps-alt ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  .pf3 .wizard-pf-steps-alt {
+    margin: 15px 0 15px 15px; }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-alt {
+      display: none; } }
+  .pf3 .wizard-pf-steps-alt-indicator {
+    position: relative; }
+  .pf3 .wizard-pf-steps-alt-indicator:after {
+    color: #4d5258;
+    content: "\F107";
+    display: block;
+    font-family: FontAwesome;
+    font-size: 24px;
+    font-weight: 500;
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  @media (min-width: 768px) {
+    .pf3 .wizard-pf-steps-alt-indicator:after {
+      display: none; } }
+  .pf3 .wizard-pf-steps-alt-indicator.active:after {
+    content: "\F106"; }
+  .pf3 .wizard-pf-step-alt {
+    position: relative;
+    z-index: 1; }
+  .pf3 .wizard-pf-step-alt:not(:last-child) {
+    padding-bottom: 10px; }
+  .pf3 .wizard-pf-step-alt a {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1;
+    flex: 1; }
+  .pf3 .wizard-pf-step-alt a:hover,
+  .pf3 .wizard-pf-step-alt a:focus {
+    text-decoration: none; }
+  .pf3 .wizard-pf-step-alt a:hover .wizard-pf-step-alt-title,
+  .pf3 .wizard-pf-step-alt a:focus .wizard-pf-step-alt-title {
+    color: #39a5dc; }
+  .pf3 .wizard-pf-step-alt ul {
+    margin-left: 11px; }
+  .pf3 .wizard-pf-step-alt .wizard-pf-step-alt-number {
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    text-align: center;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    border: 2px solid #39a5dc;
+    background-color: #fff; }
+  .pf3 .wizard-pf-step-alt .wizard-pf-step-alt-title {
+    color: #030303;
+    font-weight: 700;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-left: 5px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center; }
+  .pf3 .wizard-pf-step-alt.active .wizard-pf-step-alt-number {
+    background-color: #39a5dc;
+    border-color: #39a5dc;
+    cursor: default;
+    color: #fff; }
+  .pf3 .wizard-pf-step-alt.active .wizard-pf-step-alt-title {
+    color: #39a5dc; }
+  .pf3 .wizard-pf-step-alt.active ~ .wizard-pf-step-alt .wizard-pf-step-alt-number {
+    color: #bbb;
+    border-color: #bbb; }
+  .pf3 .wizard-pf-step-alt:not(.active) a:hover .wizard-pf-step-alt-number {
+    border-color: #bbb;
+    background: #bbb;
+    color: #fff; }
+  .pf3 .wizard-pf-step-alt:before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    height: 100%;
+    border-left: 2px solid #bbb;
+    z-index: -1; }
+  .pf3 .wizard-pf-step-alt-substep {
+    display: -ms-flexbox;
+    display: flex;
+    border-left: 2px solid transparent; }
+  .pf3 .wizard-pf-step-alt-substep a {
+    padding: 5px 0 5px 18px;
+    color: #393f44; }
+  .pf3 .wizard-pf-step-alt-substep.active,
+  .pf3 .wizard-pf-step-alt-substep:not(.disabled):hover {
+    background-color: #ededed;
+    border-color: #39a5dc; }
+  .pf3 .wizard-pf-step-alt-substep.active a,
+  .pf3 .wizard-pf-step-alt-substep:not(.disabled):hover a {
+    color: #39a5dc; }
+  .pf3 .wizard-pf-step-alt-substep.active a {
+    font-weight: 700; }
+  .pf3 .wizard-pf-step.disabled > a:hover,
+  .pf3 .wizard-pf-step-alt-substep.disabled > a:hover,
+  .pf3 .wizard-pf-sidebar .list-group-item.disabled > a:hover {
+    cursor: not-allowed; }
+  .pf3 .modal-open {
+    overflow: hidden; }
+  .pf3 .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0; }
+  .pf3 .modal.fade .modal-dialog {
+    -ms-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    transition: transform 0.3s ease-out; }
+  .pf3 .modal.in .modal-dialog {
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0); }
+  .pf3 .modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto; }
+  .pf3 .modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px; }
+  .pf3 .modal-content {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    outline: 0; }
+  .pf3 .modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000; }
+  .pf3 .modal-backdrop.fade {
+    filter: alpha(opacity=0);
+    opacity: 0; }
+  .pf3 .modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: 0.5; }
+  .pf3 .modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5; }
+  .pf3 .modal-header .close {
+    margin-top: -2px; }
+  .pf3 .modal-title {
+    margin: 0;
+    line-height: 1.66666667; }
+  .pf3 .modal-body {
+    position: relative;
+    padding: 15px; }
+  .pf3 .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5; }
+  .pf3 .modal-footer .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px; }
+  .pf3 .modal-footer .btn-group .btn + .btn {
+    margin-left: -1px; }
+  .pf3 .modal-footer .btn-block + .btn-block {
+    margin-left: 0; }
+  .pf3 .modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll; }
+  @media (min-width: 768px) {
+    .pf3 .modal-dialog {
+      width: 600px;
+      margin: 30px auto; }
+    .pf3 .modal-content {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
+    .pf3 .modal-sm {
+      width: 300px; } }
+  @media (min-width: 992px) {
+    .pf3 .modal-lg {
+      width: 900px; } }
+  .pf3 .modal-header {
+    background-color: #f5f5f5;
+    border-bottom: none;
+    padding: 10px 18px; }
+  .pf3 .modal-header .close {
+    margin-top: 2px; }
+  .pf3 .modal-title {
+    font-size: 13px;
+    font-weight: 700; }
+  .pf3 .modal-footer > .btn {
+    padding-left: 10px;
+    padding-right: 10px; }
+  .pf3 .modal-footer > .btn > .fa-angle-left {
+    margin-right: 5px; }
+  .pf3 .modal-footer > .btn > .fa-angle-right {
+    margin-left: 5px; }
+  .pf3 .message-dialog-pf .modal-body {
+    display: -ms-flexbox;
+    display: flex; }
 
