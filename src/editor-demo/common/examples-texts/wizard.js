@@ -1,45 +1,33 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
 
-const text =  `This a custom component.
+const text =  `This a custom component. OnSubmit will send only values from visited steps.
 
-Submit will contain values only from active steps. (If a user goes back and changes the way, values from left steps won't be submitted.)
+### Docs for steps
 
-<br>
+| Props  | Type  |  Decription |
+| ------------- | ------------- | ------------- |
+| stepKey  | string, number | For first step: 1, otherwise anything |
+| nextStep  | object/stepKey of next step | See below |
+| fields  | array | As usual |
 
-**PROPS**
+- nextStep can be stepKey of the next step
+- or you can branch the way by using of object:
 
-<br>
-
-As a fields it needs an array of objects which contain:
-
-- **title, name**
-
-- **stepKey**
-
-\'1\' - for the first step object.
-
-Otherwise, use a custom name which will be used as a link for the step.
-
-- **nextStep**
-
-Here you can **branch** your way using \`when\` key:
-
-\`When\` key takes a name of a field where is stored a value which decides where the way will lead to.
-
-If you are using this key, you have to provide \`stepMapper\` key where you store an object: key is the value of the field stored in \`when\` field and the value is a \`stepKey\` of next wizard step.
-
-
-<br>
-
-
-If you don't need to branch the way, you can just use a name of next wizard step.
-
-- **fields** 
-
-A content of the wizard step (as usual.)`;
+\`\`\`jsx
+nextStep: {
+        when: 'source-type', // name of field, where deciding value is stored
+        stepMapper: {
+          aws: 'aws', // value: 'stepKey' of next step
+          google: 'google',
+          ...
+        },
+},
+\`\`\``;
 
 const pf3Text = `
+This a custom component. OnSubmit will send only values from visited steps.
+
 ### Props
 
 | Prop  | Type | Default |  Decription |
@@ -88,6 +76,7 @@ You can rewrite only selection of them, e.g.
 | ------------- | ------------- | ------------- |
 | stepKey  | string, number | For first step: 1, otherwise anything |
 | nextStep  | object/stepKey of next step | See below |
+| fields  | array | As usual |
 
 - nextStep can be stepKey of the next step
 - or you can branch the way by using of object:
