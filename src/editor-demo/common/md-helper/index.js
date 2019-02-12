@@ -14,7 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 const renderers = {
-  paragraph: ({ children }) => <Typography variant="body1">{ children }</Typography>,
+  paragraph: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
   code: ({ value, language }) =>
     <div style={{ background: '#272822', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
       <AceEditor
@@ -55,6 +55,9 @@ const renderers = {
   tableHead: ({ children }) =>  <TableHead>{ children }</TableHead>,
   tableRow: ({ children }) =>  <TableRow>{ children }</TableRow>,
   tableCell: ({ children }) =>  <TableCell>{ children }</TableCell>,
+  inlineCode: ({ children }) => <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px'  }}>
+    { children }
+  </code>,
 };
 
 export default ({ source }) => <ReactMarkdown escapeHtml={ false } source={ source } renderers={ renderers } />;

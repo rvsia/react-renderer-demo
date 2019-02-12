@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import { componentTypes } from '@data-driven-forms/react-form-renderer';
+
+const getTypes = () => Object.entries(componentTypes).reduce((acc, curr) => `${acc}\n  ${curr[0]}: '${curr[1]}',`,
+  '//TEXTEAREA_FIELD and SELECT COMPONENT ARE DEPRECATED!\n  //Please use TEXTAREA and SELECT!');
 
 const text =  `
 There are currently 3 schema definitions you can use to define your forms. With the intention to provide additional customization in the future. Currently supported schemas are:
@@ -42,7 +46,7 @@ const schema = {
 
 Example above shows definition of a very simple form with two form fields and a validation. We will now take a closer look at its attributes.
 
-#### \`default-schema-attributes\`
+#### default-schema-attributes
 |name|data type|
 |---|---|
 |\`title?\`| string|
@@ -51,13 +55,13 @@ Example above shows definition of a very simple form with two form fields and a 
 
 Detailed descriptions of each attribute is below.
 
-#### \`title?: string\`
+#### title?: string
 Attribute defining form title.
 
-#### \`description?: string\`
-Attribute defining form description. 
+#### description?: string
+Attribute defining form description.
 
-#### \`fields: Array.<Object>\`
+#### fields: Array of Objects
 Array that contains field definitions.
 
 #### Fields
@@ -71,7 +75,7 @@ In human language, items of field array must be either objects, where each objec
 
 The structure of a single object is following:
 
-#### \`field attributes\`
+#### field attributes
 
 There are listed all field (items of the \`fields\` array) attributes that are defined by the default schema. Any other attributes given to field object are automatically passed to the specified component.
 
@@ -104,41 +108,26 @@ const field = {
 
 Note that the field structure may vary based on your component implementation. There are few required attributes and most of them do not have to match the given types. Most of them are based on used form components.
 
-#### \`component: string\`
+#### component: string
 Unique identifier of the component. Final component will be picked based on this key. There are several pre-defined constants identifying the most common components for ManageIQ and Insights apps.
 
 \`\`\`jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 componentTypes = {
-  TEXT_FIELD: 'text-field',
-  TEXTAREA_FIELD: 'textarea-field', // deprecated, please use TEXTAREA
-  FIELD_ARRAY: 'field-array', 
-  SELECT_COMPONENT: 'select-field', // deprecated, please use SELECT
-  FIXED_LIST: 'fixed-list',
-  CHECKBOX: 'checkbox',
-  SUB_FORM: 'sub-form',
-  RADIO: 'radio',
-  TABS: 'tabs',
-  TAB_ITEM: 'tab-item',
-  DATE_PICKER: 'date-picker',
-  TIME_PICKER: 'time-picker',
-  TAG_CONTROL: 'tag-control',
-  SWITCH: 'switch',
-  TEXTAREA: 'textarea-field',
-  SELECT: 'select-field',
+  ${getTypes()}
 }
 \`\`\`
 
 We are not limited by these component types. You can add your own type or use only few of them or combination of both. More detailed explanation of how this impacts the rendered form [can be found here](#form-fields-mapper).
 
-#### \`name: string\`
+#### name: string
 This is traditional html5 name attribute for input elements.
 
-#### \`label\`
+#### label
 Label for form field. The type is based on your component definition.
 
-#### \`validate: Array?<Object>\`
+#### validate: Array? of Objects
 Array of validation definitions. These are limited by the form renderer (Might be configurable in future).
 
 If you want to use out of the box validation, you must use this format:
@@ -157,24 +146,32 @@ import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 validatorTypes = {
   REQUIRED: 'required-validator',
   /**
-  * min length if the input value
-  */
+   * Minimum length of the input value
+   */
   MIN_LENGTH: 'min-length-validator',
   /**
-  * minimum count of fileds in some dynamic list of fields
-  */
+   * Maximum length of the input value
+   */
+  MAX_LENGTH: 'max-length-validator',
+  /**
+   * Exact length of input value
+   */
+  EXACT_LENGTH: 'exact-length-validator',
+  /**
+   * Minimum count of fields in some dynamic list of fields
+   */
   MIN_ITEMS_VALIDATOR: 'min-items-validator',
   /**
-  * Minimum value of number input
-  */
+   * Minimum value of number input
+   */
   MIN_NUMBER_VALUE: 'min-number-value',
   /**
-   * Maximum value of number inpuy
-  */
+   * Maximum value of number input
+   */
   MAX_NUMBER_VALUE: 'max-number-value',
   /**
-  * Regexp pattern validator
-  */
+   * Regexp pattern validator
+   */
   PATTERN_VALIDATOR: 'pattern-validator',
 }
 
@@ -183,6 +180,12 @@ const validate = [{
   message: 'This is custom error message'
 }, {
   type: validatorTypes.MIN_LENGTH,
+  treshold: integer
+}, {
+  type: validatorTypes.MAX_LENGTH,
+  treshold: integer
+}, {
+  type: validatorTypes.EXACT_LENGTH,
   treshold: integer
 }, {
   type: validatorTypes.MIN_ITEMS_VALIDATOR,
@@ -201,7 +204,7 @@ const validate = [{
 \`\`\`
 Validation functions are triggered only when field has a value with exception of required validator.
 
-#### \`dataType: string?\`
+#### dataType: string?
 Adds field validation based on the value data type.
 
 \`\`\`jsx
@@ -221,12 +224,12 @@ There are currently four defined data types:
 ['integer', 'number', 'bool', 'string']
 \`\`\`
 
-#### \`assignFieldProvider: bool?\` [DEPRECATED]
-FieldProvider is just a fancy name for [Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops). Following component types are wrapped in the FieldProvider by default:
+#### assignFieldProvider: bool?
+FieldProvider is just a fancy name for [Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops).
+
+Following component types are wrapped in the FieldProvider by default:
 
 \`\`\`jsx
-import { componentTypes } from '@data-driven-forms/react-form-renderer';
-
 const wrappedComponents = [
   componentTypes.TEXT_FIELD,
   componentTypes.TEXTAREA_FIELD,
@@ -241,9 +244,9 @@ const wrappedComponents = [
 ];
 \`\`\`
 
-Because we can't possibly guess all viable component types, by using \`assignFieldProvider\` attribute you will add the \`FieldProvider\` component to your Form Field props. This wrapper will add necessary props to your component that will handle form state updates. It is reccomended to read about field component in React Final Form docs. 
+This wrapper will add necessary props to your component that will handle form state updates. It is reccomended to read about field component in React Final Form docs. 
 
-#### \`condition: Object?\`
+#### condition: Object?
 Condition is used to define condition fields. For instance, field **A** should render only when field **B** has value **Foo**.
 
 \`\`\`jsx
