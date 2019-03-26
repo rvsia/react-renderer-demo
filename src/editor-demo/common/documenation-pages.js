@@ -4,6 +4,7 @@ import FormSchemasText from './doc-texts/form-schemas';
 import ComponentMappingText from './doc-texts/component-mapping';
 import Condition from './doc-texts/condition';
 import Validators from './doc-texts/validators';
+import FieldProvider from './doc-texts/field-provider';
 
 export const docs = [{
   component: 'installation',
@@ -29,4 +30,8 @@ export const docs = [{
   component: 'validators',
   linkText: 'Validators',
   contentText: Validators,
+}, {
+  component: 'field-provider',
+  linkText: 'FieldProvider',
+  contentText: FieldProvider,
 }];
