@@ -3,6 +3,7 @@ import InstallationText from './doc-texts/installation';
 import FormSchemasText from './doc-texts/form-schemas';
 import ComponentMappingText from './doc-texts/component-mapping';
 import Condition from './doc-texts/condition';
+import Validators from './doc-texts/validators';
 
 export const docs = [{
   component: 'installation',
@@ -24,4 +25,8 @@ export const docs = [{
   component: 'conditions',
   linkText: 'Conditional fields',
   contentText: Condition,
+}, {
+  component: 'validators',
+  linkText: 'Validators',
+  contentText: Validators,
 }];
