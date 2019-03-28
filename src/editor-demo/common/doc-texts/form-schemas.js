@@ -32,7 +32,7 @@ const schema = {
       message: 'First name is required'
     }, {
       type: validatorTypes.MIN_LENGTH,
-      treshold: 3,
+      threshold: 3,
       message: 'First name must be at least 3 characters long'
     }]
   }, {
@@ -180,16 +180,16 @@ const validate = [{
   message: 'This is custom error message'
 }, {
   type: validatorTypes.MIN_LENGTH,
-  treshold: integer
+  threshold: integer
 }, {
   type: validatorTypes.MAX_LENGTH,
-  treshold: integer
+  threshold: integer
 }, {
   type: validatorTypes.EXACT_LENGTH,
-  treshold: integer
+  threshold: integer
 }, {
   type: validatorTypes.MIN_ITEMS_VALIDATOR,
-  treshold: integer
+  threshold: integer
 }, {
   type: validatorTypes.MIN_NUMBER_VALUE
   value: integer
