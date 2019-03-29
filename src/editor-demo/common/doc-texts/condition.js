@@ -115,6 +115,9 @@ condition: {
 // Foo = 'bar' => false
 \`\`\`
 
+## Clearing values
+
+If you need to clear values after switching fields, please see [here](/renderer/unmounting). 
 
 `;
 
