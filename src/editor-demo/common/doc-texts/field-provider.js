@@ -1,114 +1,130 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import TableOfContent, { headerToId } from '../helpers/list-of-content';
 
 const text = `
-  React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
-  Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
-  components, you can access these features via **FieldProvider**.
+React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
+Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
+components, you can access these features via **FieldProvider**.
 
 
-  FieldProvider is a wrapper component around standard
-  [react-final-form Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops)
-  which adds additional methods that will help you to control your form state.
+FieldProvider is a wrapper component around standard
+[react-final-form Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops)
+which adds additional methods that will help you to control your form state.
 
-  ## Accessing FieldProvider
+<a id="${headerToId('Accessing FieldProvider')}" />
 
-  To use Fieldprovider, you first need to register a component to your component mapper.
-  You can read more about that in [Component mapping](/renderer/component-mapping).
+### Accessing FieldProvider
 
-  Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
-  automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
-  standard form components. List of standard components is avaiable [here](/renderer/form-schemas).
+To use Fieldprovider, you first need to register a component to your component mapper.
+You can read more about that in [Component mapping](/renderer/component-mapping).
 
-  ## Using FieldProvider
+Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
+automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
+standard form components. List of standard components is avaiable [here](/renderer/form-schemas).
 
-  1. Register component
+<a id="${headerToId('Using FieldProvider')}" />
 
-  \`\`\`jsx
-  import NewComponent from './new-component'
+### Using FieldProvider
 
-  const formFieldsMapper = {
-    'new-component': NewComponent
-  }
-  \`\`\`
+1. Register component
 
-  2. Implementation
+\`\`\`jsx
+import NewComponent from './new-component'
 
-  Next example shows simple input field with label and error message.
+const formFieldsMapper = {
+  'new-component': NewComponent
+}
+\`\`\`
 
-  \`\`\`jsx
-  import React from 'react';
+2. Implementation
 
-  const NewComponent = ({ FieldProvider, formOptions, name ...rest }) => (
-    <div>
-      <FieldProvider {...rest} name={name}>
-        {({ input, meta, ...props }) => {
-          return (
-            <div>
-              <label>{props.label}</label>
-              <input {...input} />
-              {meta.error && <label>{meta.error}</label>}
-            </div>
-          )
-        }}
-      </FieldProvider>
-    </div>
-  )
+Next example shows simple input field with label and error message.
 
-  export default NewComponent
-  \`\`\`
+\`\`\`jsx
+import React from 'react';
 
-  ## What are input and meta?
-  
-  ### Input
+const NewComponent = ({ FieldProvider, formOptions, name ...rest }) => (
+  <div>
+    <FieldProvider {...rest} name={name}>
+      {({ input, meta, ...props }) => {
+        return (
+          <div>
+            <label>{props.label}</label>
+            <input {...input} />
+            {meta.error && <label>{meta.error}</label>}
+          </div>
+        )
+      }}
+    </FieldProvider>
+  </div>
+)
 
-  Input is an object which contains methods that change form state. It contains these attributes:
-  
-  \`\`\`json
-  {
-    value: any, // any value of given form field. Its data type is based on field data type
-    name: string,// unique name of form field. Value will be accessible under this key in form state
-    onBlur: (event) => void, // function that should be triggered on field blur event
-    onChange: (value) => void, // function that changes value of field in formState. Should be called whenever you want to change value of field
-    onFocus: (event) => void, // function that should be triggered on field focus event
-  }
-  \`\`\`
+export default NewComponent
+\`\`\`
 
-  Every user interaction that updates field value in form state should also call \`input.onChange\` with correct value.
+<a id="${headerToId('What are input and meta?')}" />
 
-  ### Meta
+### What are input and meta?
 
-  Meta is a object which contains meta information about field with given name. There is a lot of information about every field.
-  [Full list is here](https://github.com/final-form/react-final-form#metaactive-boolean). These are commonly used meta informations
-  \`\`\`json
-  {
-    error: any, // whatever your validation function returns
-    pristine: bool, // true if the current value is === to the initial value, false if the values are !==.
-    dirty: bool, // opposite of pristine
-    touched: bool, //true if this field has ever gained and lost focus. false otherwise. Useful for knowing when to display error messages.
-    valid: bool //true if this field has no validation or submission errors. false otherwise.
-  }
-  \`\`\`
+<a id="${headerToId('Input')}" />
 
-  ## FormOptions
+#### Input
 
-  In addition to FieldProvider, every component will also receive prop \`formOptions\`.
-  This property contains a number of useful methods and attributes that will give you additional level of control
-  and informations about the formState.
+Input is an object which contains methods that change form state. It contains these attributes:
 
-  \`\`\`json
-  {
-    blur: (name) => void, // calls onBlur event on field with given name
-    change: (name, value) => void, // calls onChange event on field with given name
-    focus: (name) => void, // calls onFocus event on field with given name
-    getFieldState: (name) => object, // returns a state of given field, state contains input and meta information of field
-    getRegisteredFields: () => string[], // returns an array of field names that are rendered in DOM
-    getState: () => object, // returns an object with whole form state. More info https://github.com/final-form/final-form#formstate
-    pristine: bool, // true if the all field values is === to the initial values, false if the values are !==.
-    renderForm: (defaultSchema) => void, // function that is used by form renderer to render form fields defined by defaultSchema; can be used for schema nesting
-    valid: bool //true if all fields have no validation or submission errors. false otherwise.
-  }
-  \`\`\`
+\`\`\`json
+{
+  value: any, // any value of given form field. Its data type is based on field data type
+  name: string,// unique name of form field. Value will be accessible under this key in form state
+  onBlur: (event) => void, // function that should be triggered on field blur event
+  onChange: (value) => void, // function that changes value of field in formState. Should be called whenever you want to change value of field
+  onFocus: (event) => void, // function that should be triggered on field focus event
+}
+\`\`\`
+
+Every user interaction that updates field value in form state should also call \`input.onChange\` with correct value.
+
+<a id="${headerToId('Meta')}" />
+
+#### Meta
+
+Meta is a object which contains meta information about field with given name. There is a lot of information about every field.
+[Full list is here](https://github.com/final-form/react-final-form#metaactive-boolean). These are commonly used meta informations
+\`\`\`json
+{
+  error: any, // whatever your validation function returns
+  pristine: bool, // true if the current value is === to the initial value, false if the values are !==.
+  dirty: bool, // opposite of pristine
+  touched: bool, //true if this field has ever gained and lost focus. false otherwise. Useful for knowing when to display error messages.
+  valid: bool //true if this field has no validation or submission errors. false otherwise.
+}
+\`\`\`
+
+<a id="${headerToId('FormOptions')}" />
+
+### FormOptions
+
+In addition to FieldProvider, every component will also receive prop \`formOptions\`.
+This property contains a number of useful methods and attributes that will give you additional level of control
+and informations about the formState.
+
+\`\`\`json
+{
+  blur: (name) => void, // calls onBlur event on field with given name
+  change: (name, value) => void, // calls onChange event on field with given name
+  focus: (name) => void, // calls onFocus event on field with given name
+  getFieldState: (name) => object, // returns a state of given field, state contains input and meta information of field
+  getRegisteredFields: () => string[], // returns an array of field names that are rendered in DOM
+  getState: () => object, // returns an object with whole form state. More info https://github.com/final-form/final-form#formstate
+  pristine: bool, // true if the all field values is === to the initial values, false if the values are !==.
+  renderForm: (defaultSchema) => void, // function that is used by form renderer to render form fields defined by defaultSchema; can be used for schema nesting
+  valid: bool //true if all fields have no validation or submission errors. false otherwise.
+}
+\`\`\`
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text= { text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;
