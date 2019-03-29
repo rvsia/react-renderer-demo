@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
+import TableOfContent, { headerToId } from '../helpers/list-of-content';
 
 const getTypes = (firstLine, apostrohpe = false) =>
   Object
@@ -14,6 +15,8 @@ We also understand that writing form components from the scratch might not be ve
 
 Form renderer requires two different mappers. Layout mapper and Form  FieldsMapper.
 
+<a id="${headerToId('Layout mapper')}" />
+
 ### Layout mapper
 Component inside this mapper influence the layout of the form. Now compared to the Form Fields mapper, we have to be very strict because we cannot define our own elements. Layout mapper must contain these types components:
 
@@ -25,6 +28,8 @@ ${ getTypes('const layoutComponents = {', true) }
 \`\`\`
 
 LayoutMapper is just good old javascript object with keys from layoutComponents, and the values are just React components:
+
+<a id="${headerToId('FormWrapper')}" />
 
 #### FormWrapper
 
@@ -46,6 +51,8 @@ const MyForm = () => (
 )
 \`\`\`
 
+<a id="${headerToId('Button')}" />
+
 #### Button
 Button component will be used for your submit, reset and cancel buttons.
 
@@ -65,6 +72,8 @@ const layoutMapper = {
 }
 \`\`\`
 
+<a id="${headerToId('Col')}" />
+
 #### Col
 Col represents wrapper arround one Form Field (hence the name Col). It does not have to mirror bootstrap Col, which is just the name we have decided to go with. If you for instance don't need any Col (or other wrapping) component, and you are handling this inside the actual Field component, you can use \`<React.Fragment>\` component. This way you will not create any element in your DOM. On the other hand, it might be usefull to implement it as a container for your components. Because we can't possibly create layout that suit 100% of our use cases, we can use this wrapper to pass additional styles to field components.
 
@@ -75,6 +84,8 @@ const Col = ({ children }) => (
   <div className="form-row">{children}</div>
 )
 \`\`\`
+
+<a id="${headerToId('FormGroup')}" />
 
 #### FormGroup
 
@@ -88,6 +99,8 @@ const FormGroup = ({ children }) => (
 )
 \`\`\`
 
+<a id="${headerToId('ButtonGroup')}" />
+
 #### ButtonGroup
 Wrapper for your form buttons
 
@@ -99,8 +112,12 @@ const ButtonGroup = ({ children }) => (
 )
 \`\`\`
 
+<a id="${headerToId('Icon, Array Field Wrapper, Help Block')}" />
+
 #### Icon, Array Field Wrapper, Help Block
 TO DO when array field docs are done
+
+<a id="${headerToId('Putting it all together')}" />
 
 #### Putting it all together
 
@@ -118,6 +135,8 @@ const MyForm = () => (
   />
 )
 \`\`\`
+
+<a id="${headerToId('Form Fields mapper')}" />
 
 ### Form Fields mapper
 
@@ -176,6 +195,8 @@ const schema = {
 
 \`\`\`
 
+<a id="${headerToId('What about nesting?')}" />
+
 #### What about nesting?
 There might be a need to create something like a SubForm in your Forms. We made it possible, and there are two ways to do it.
 
@@ -226,4 +247,8 @@ const CustomSubForm = ({ formOptions, fields, ...rest }) => (
 FormOptions are passed to every field (default and custom). If you extend it, the child of the sub form will receive your modified formOptions. You can even change te rendering function if you wish.
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text= { text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;
+
