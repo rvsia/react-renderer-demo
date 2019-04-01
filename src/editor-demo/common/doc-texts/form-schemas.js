@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
-import TableOfContent, { headerToId } from '../helpers/list-of-content';
+import TableOfContent from '../helpers/list-of-content';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const getTypes = () => Object.entries(componentTypes).reduce((acc, curr) => `${acc}\n  ${curr[0]}: '${curr[1]}',`,
@@ -13,8 +13,6 @@ With the intention to provide additional customization in the future. Currently 
 - Default-schema
 - ManageIQ schema
 - Mozilla json schema
-
-<a id="${headerToId('Default schema')}" />
 
 ### Default schema
 
@@ -54,8 +52,6 @@ const schema = {
 
 Example above shows definition of a very simple form with two form fields and a validation. We will now take a closer look at its attributes.
 
-<a id="${headerToId('default-schema-attributes')}" />
-
 #### default-schema-attributes
 
 |name|data type|
@@ -66,25 +62,17 @@ Example above shows definition of a very simple form with two form fields and a 
 
 Detailed descriptions of each attribute is below.
 
-<a id="${headerToId('title?: string')}" />
-
 #### title?: string
 
 Attribute defining form title.
-
-<a id="${headerToId('description?: string')}" />
 
 #### description?: string
 
 Attribute defining form description.
 
-<a id="${headerToId('fields: Array of Objects')}" />
-
 #### fields: Array of Objects
 
 Array that contains field definitions.
-
-<a id="${headerToId('Fields')}" />
 
 #### Fields
 
@@ -99,8 +87,6 @@ In human language, items of field array must be either objects, where each objec
 or array of objects, which are form fields as well. This rule allows the component to render all the fields in one cycle with minimal code branching.
 
 The structure of a single object is following:
-
-<a id="${headerToId('field attributes')}" />
 
 #### field attributes
 
@@ -137,8 +123,6 @@ const field = {
 Note that the field structure may vary based on your component implementation. There are few required attributes and most of 
 them do not have to match the given types. Most of them are based on used form components.
 
-<a id="${headerToId('component: string')}" />
-
 #### component: string
 
 Unique identifier of the component. Final component will be picked based on this key. There are several pre-defined constants 
@@ -155,19 +139,13 @@ componentTypes = {
 We are not limited by these component types. You can add your own type or use only few of them or combination of both. 
 More detailed explanation of how this impacts the rendered form [can be found here](#form-fields-mapper).
 
-<a id="${headerToId('name: string')}" />
-
 #### name: string
 
 This is traditional html5 name attribute for input elements.
 
-<a id="${headerToId('label')}" />
-
 #### label
 
 Label for form field. The type is based on your component definition.
-
-<a id="${headerToId('validate: Array? of Objects')}" />
 
 #### validate: Array? of Objects
 
@@ -247,8 +225,6 @@ const validate = [{
 \`\`\`
 Validation functions are triggered only when field has a value with exception of required validator.
 
-<a id="${headerToId('dataType: string?')}" />
-
 #### dataType: string?
 
 Adds field validation based on the value data type.
@@ -269,8 +245,6 @@ There are currently four defined data types:
 \`\`\`jsx
 ['integer', 'number', 'bool', 'string']
 \`\`\`
-
-<a id="${headerToId('assignFieldProvider: bool?')}" />
 
 #### assignFieldProvider: bool?
 
@@ -295,8 +269,6 @@ const wrappedComponents = [
 
 This wrapper will add necessary props to your component that will handle form state updates. It is reccomended to 
 read about field component in React Final Form docs. 
-
-<a id="${headerToId('condition: Object?')}" />
 
 #### condition: Object?
 
@@ -339,8 +311,6 @@ const fields = [{
 
 In example above, field \`Bar\` will appear when fields \`Foo\` value is \`Show bar field\`, \`true\`, \`123\` or \`Or now\`.
 
-<a id="${headerToId('Other attributes')}" />
-
 #### Other attributes
 
 Any other attributes will be passed to the component matching the \`component\` identifier.
@@ -369,8 +339,6 @@ const field = {
 
 Remember that the components define the interface. If your label is an image, pass the image source with isImage 
 flag maybe and handle rendering in the component.
-
-<a id="${headerToId('Field array and Fixed list')}" />
 
 ### Field array and Fixed list
 

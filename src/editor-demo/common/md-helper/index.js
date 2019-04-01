@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { headerToId } from '../helpers/list-of-content';
 
 const renderers = {
   paragraph: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
@@ -39,7 +40,10 @@ const renderers = {
       />
     </div>,
   link: ({ href, children }) => <Link href={ href }>{ children }</Link>,
-  heading: ({ level, children }) => <Typography variant={ `h${level + 2}` } style={{ marginBottom: 10, marginTop: 10 }}>{ children }</Typography>,
+  heading: ({ level, children }) => <React.Fragment>
+    <a id={ headerToId(children[0].props.value) } />
+    <Typography variant={ `h${level + 2}` } style={{ marginBottom: 10, marginTop: 10 }}>{ children }</Typography>
+  </React.Fragment>,
   list: ({ children }) => <List>{ children }</List>,
   listItem: ({ children }) =>
     <ListItem>

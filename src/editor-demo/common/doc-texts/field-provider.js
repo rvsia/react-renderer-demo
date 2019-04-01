@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
-import TableOfContent, { headerToId } from '../helpers/list-of-content';
+import TableOfContent from '../helpers/list-of-content';
 
 const text = `
 React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
@@ -12,8 +12,6 @@ FieldProvider is a wrapper component around standard
 [react-final-form Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops)
 which adds additional methods that will help you to control your form state.
 
-<a id="${headerToId('Accessing FieldProvider')}" />
-
 ### Accessing FieldProvider
 
 To use Fieldprovider, you first need to register a component to your component mapper.
@@ -22,8 +20,6 @@ You can read more about that in [Component mapping](/renderer/component-mapping)
 Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
 automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
 standard form components. List of standard components is avaiable [here](/renderer/form-schemas).
-
-<a id="${headerToId('Using FieldProvider')}" />
 
 ### Using FieldProvider
 
@@ -63,11 +59,7 @@ const NewComponent = ({ FieldProvider, formOptions, name ...rest }) => (
 export default NewComponent
 \`\`\`
 
-<a id="${headerToId('What are input and meta?')}" />
-
 ### What are input and meta?
-
-<a id="${headerToId('Input')}" />
 
 #### Input
 
@@ -85,8 +77,6 @@ Input is an object which contains methods that change form state. It contains th
 
 Every user interaction that updates field value in form state should also call \`input.onChange\` with correct value.
 
-<a id="${headerToId('Meta')}" />
-
 #### Meta
 
 Meta is a object which contains meta information about field with given name. There is a lot of information about every field.
@@ -100,8 +90,6 @@ Meta is a object which contains meta information about field with given name. Th
   valid: bool //true if this field has no validation or submission errors. false otherwise.
 }
 \`\`\`
-
-<a id="${headerToId('FormOptions')}" />
 
 ### FormOptions
 

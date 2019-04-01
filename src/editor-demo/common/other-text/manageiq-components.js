@@ -3,8 +3,6 @@ import ReactMarkdown from '../md-helper';
 import TableOfContent from '../helpers/list-of-content';
 
 const text =  `
-<a id="duallist-select">
-
 ### Duallist select
 
 **Props**
@@ -83,8 +81,6 @@ By default, the value contains all options from the right side select. However, 
 <br />
 
 **3** Then you can send values to endpoints/API!
-
-<a id="horizontal-rule">
 
 ### Horizontal rule
 

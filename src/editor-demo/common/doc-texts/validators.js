@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
-import TableOfContent, { headerToId } from '../helpers/list-of-content';
+import TableOfContent from '../helpers/list-of-content';
 
 const text = `
 You can validate a form by using of \`dataType\` or \`validate\`.
 
 DataTypes is used when you need validate only a data type of a value. For more complicated validators, you have to use validate.
-
-<a id="${headerToId('dataType')}" />
 
 ### dataType
 
@@ -27,8 +25,6 @@ Currently, there are four types supported:
 \`\`\`jsx
 ['integer', 'number', 'bool', 'string']
 \`\`\`
-
-<a id="${headerToId('Overwriting default messages')}" />
 
 ### Overwriting default messages
 
@@ -85,8 +81,6 @@ You need to provide a \`validate\` array in the schema:
 A item of the validate array is 
 * a) object containing type and other specific values (see Default validators)
 * b) function
-
-<a id="${headerToId('Default validators')}" />
 
 #### Default validators
 
@@ -159,8 +153,6 @@ Validation functions are triggered only when field has a value with exception of
 
 Each validator type has additional configuration options in addition to custom error message.
 
-<a id="${headerToId('Custom function')}" />
-
 #### Custom function
 
 As validator you can provide your custom function:
@@ -183,8 +175,6 @@ const isOdd = (value) => value % 2 === 0 ? undefined : 'Value is odd!';
 \`\`\`
 
 The function takes \`value\` as an argument and should return undefined when pasess or string as an error message when fails.
-
-<a id="${headerToId('Async validator')}" />
 
 #### Async validator
 
@@ -222,8 +212,6 @@ validate: [
 ],
 ...
 \`\`\`
-
-<a id="${headerToId('validateOnMount')}" />
 
 ### validateOnMount
 
